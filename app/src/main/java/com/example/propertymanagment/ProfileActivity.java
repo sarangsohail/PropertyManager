@@ -201,10 +201,12 @@ public class ProfileActivity extends AppCompatActivity {
                     DatabaseReference newNotificationref = mRootRef.child("notifications").child(user_id).push();
                     String newNotificationId = newNotificationref.getKey();
 
+                    //more efficient method query-ing to the db
                     HashMap<String, String> notificationData = new HashMap<>();
                     notificationData.put("from", mCurrent_user.getUid());
                     notificationData.put("type", "request");
 
+                    //passed in to the 'rootref', the childless db, to do 3 queries at once.
                     Map requestMap = new HashMap();
                     requestMap.put("Friend_req/" + mCurrent_user.getUid() + "/" + user_id + "/request_type", "sent");
                     requestMap.put("Friend_req/" + user_id + "/" + mCurrent_user.getUid() + "/request_type", "received");
