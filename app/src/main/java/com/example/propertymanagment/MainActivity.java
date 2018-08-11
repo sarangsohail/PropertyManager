@@ -51,14 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
             sendToStartActivity();
         }
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.chat_menu, menu);
-
 
         return super.onCreateOptionsMenu(menu);
 
