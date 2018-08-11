@@ -15,9 +15,13 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private ProgressBar spinner;
 
+    private DatabaseReference mUserDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mLoginEmail = (TextInputEditText) findViewById(R.id.login_email);
         mLoginPassword = (TextInputEditText) findViewById(R.id.login_password);
@@ -72,11 +80,24 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
 
                      spinner.setVisibility(View.INVISIBLE);
-                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    //stops the activity from going back to previous activity
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                    finish();
+
+                    String current_user_id = mAuth.getCurrentUser().getUid();
+                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
+
+                    mUserDatabase.child(current_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            //stops the activity from going back to previous activity
+                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                            startActivity(mainIntent);
+
+                            finish();
+
+                        }
+                    });
 
 
                 }else{

@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -61,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
+
                 if (!TextUtils.isEmpty(display_name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
 
                     spinner.setVisibility(View.VISIBLE);
@@ -81,12 +83,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                            mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
 
+                           String device_token = FirebaseInstanceId.getInstance().getToken();
+
                            //used to store data in the firebase database -gi
                            HashMap<String, String> usermap = new HashMap<>();
                            usermap.put("name", display_name);
                            usermap.put("status", "I'm available, contact me if you have any issues.");
                            usermap.put("image", "default");
-                           usermap.put("thumb_image", "default");
+                           usermap.put("device_token", device_token);
 
                            mDatabase.setValue(usermap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                @Override

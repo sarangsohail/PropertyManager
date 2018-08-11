@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".PropertyManager">
+
+        <service android:name=".FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".StartActivity" />
         <activity
             android:name=".RegisterActivity"
@@ -41,7 +49,12 @@
         <activity
             android:name=".UsersActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ProfileActivity" android:parentActivityName=".SettingsActivity"></activity>
+        <activity android:name=".ProfileActivity" android:parentActivityName=".SettingsActivity">
+            <intent-filter>
+                <action android:name="in.sarang.propertyManager_TARGET_NOTIFICATION"></action>
+                <category android:name="android.intent.category.DEFAULT"> </category>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
