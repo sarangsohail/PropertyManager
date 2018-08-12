@@ -36,7 +36,6 @@ public class PropertyManager extends Application {
                     if (dataSnapshot != null) {
 
                         mUserDatabase.child("online").onDisconnect().setValue(ServerValue.TIMESTAMP);
-
                     }
 
                 }

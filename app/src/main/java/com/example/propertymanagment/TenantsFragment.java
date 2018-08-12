@@ -9,13 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -51,7 +49,6 @@ public class TenantsFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,18 +82,19 @@ public class TenantsFragment extends Fragment {
                         .setQuery(mUsersDatabase, Friends.class)
                         .build();
 
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Friends, FriendsFragment.FriendsViewHolder>(options) {
+        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(options) {
+
 
             @NonNull
             @Override
-            public FriendsFragment.FriendsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            public FriendsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 View view = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.users_single_layout, viewGroup, false);
-                return new FriendsFragment.FriendsViewHolder(view);
+                return new FriendsViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(final FriendsFragment.FriendsViewHolder friendsViewHolder, int position, @NonNull Friends friends) {
+            protected void onBindViewHolder(final FriendsViewHolder friendsViewHolder, int position, @NonNull final Friends friends) {
 
                 friendsViewHolder.setDate(friends.getDate());
 
@@ -107,17 +105,18 @@ public class TenantsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         final String userName = dataSnapshot.child("name").getValue().toString();
-                      //  String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                        final String userStatus = dataSnapshot.child("status").getValue().toString();
+
 
                         if (dataSnapshot.hasChild("online")) {
 
                             String userOnline = dataSnapshot.child("online").getValue().toString();
-                          //  friendsViewHolder.setUserOnline(userOnline);
+                            friendsViewHolder.setUserOnline(userOnline);
 
                         }
-
                         friendsViewHolder.setName(userName);
-                       // friendsViewHolder.setUserImage(userThumb, getContext());
+                        friendsViewHolder.setStatus(userStatus);
+                        // friendsViewHolder.setUserImage(userThumb, getContext());
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -144,7 +143,7 @@ public class TenantsFragment extends Fragment {
 
                                         if (i == 1) {
 
-                                            Intent chatIntent = new Intent(getContext(), Chat_activity.class);
+                                            Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                             chatIntent.putExtra("user_id", list_user_id);
                                             chatIntent.putExtra("user_name", userName);
                                             startActivity(chatIntent);
@@ -176,36 +175,39 @@ public class TenantsFragment extends Fragment {
 
 
     }
+    public static class FriendsViewHolder extends RecyclerView.ViewHolder {
 
-        public static class FriendsViewHolder extends RecyclerView.ViewHolder {
+        View mView;
 
-    View mView;
+        public FriendsViewHolder(View itemView) {
+            super(itemView);
 
-    public FriendsViewHolder(View itemView) {
-        super(itemView);
+            mView = itemView;
 
-        mView = itemView;
+        }
 
-    }
+        public void setDate(String date) {
 
-    public void setDate(String date) {
+            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+            userStatusView.setText(date);
 
-        TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
-        userStatusView.setText(date);
+        }
 
-    }
+        public void setName(String name) {
 
-    public void setName(String name) {
+            TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
+            userNameView.setText(name);
 
-        TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
-        userNameView.setText(name);
+        }
 
-    }
-
+        public void setStatus(String status){
+            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+            userStatusView.setText(status);
+        }
 
         public void setUserOnline(String online_status) {
 
-            ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_image);
+            ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);
 
             if (online_status.equals("true")) {
 
@@ -219,6 +221,5 @@ public class TenantsFragment extends Fragment {
 
         }
 
-}
-
+    }
 }

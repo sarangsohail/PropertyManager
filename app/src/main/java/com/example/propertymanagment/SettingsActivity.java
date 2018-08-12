@@ -108,6 +108,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+
         changeStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -4,6 +4,7 @@ package com.example.propertymanagment;
 
         //currently, the only value in the db
         public String date;
+        public String mStatus;
 
         public Friends(){
 
@@ -21,5 +22,12 @@ package com.example.propertymanagment;
             this.date = date;
         }
 
+        public String getmStatus() {
+            return mStatus;
+        }
 
-}
+
+        public void setmStatus(String mStatus) {
+            this.mStatus = mStatus;
+        }
+    }
