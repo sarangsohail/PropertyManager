@@ -53,10 +53,11 @@
             <intent-filter>
                 <action android:name="in.sarang.propertyManager_TARGET_NOTIFICATION" />
 
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".FriendsFragment"></activity>
+        <activity android:name=".FriendsFragment" />
+        <activity android:name=".Chat_activity"></activity>
     </application>
 
 </manifest>
