@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:alpha="0.5"
+            android:src="@drawable/add_icon"
             android:background="@android:color/white"
             android:padding="10dp"
             />
@@ -63,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:alpha="0.5"
+            android:src="@drawable/send_icon"
             android:background="@android:color/white"
             android:padding="10dp" />
     </LinearLayout>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 public class ChatActivity extends AppCompatActivity {
 
     private String mUserChat;
@@ -21,6 +24,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
+    private TextView mTitleView;
+    private TextView lastSeenView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,47 @@ public class ChatActivity extends AppCompatActivity {
         View action_bar_view = layoutInflater.inflate(R.layout.chat_custom_bar, null);
 
         actionBar.setCustomView(action_bar_view);
+
+        //custom chat bar view items
+        mTitleView = (TextView) findViewById(R.id.custom_chat_name);
+        lastSeenView = (TextView) findViewById(R.id.custom_bar_seen);
+
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+
+        mTitleView.setText(user_chat_name);
+
+        mRootRef.child("Users").child(mUserChat).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String online = dataSnapshot.child("online").getValue().toString();
+
+                GetTimeAgo getTimeAgo = null;
+
+                if(online.equals("true")) {
+
+                    lastSeenView.setText(R.string.chat_online_string);
+
+                }else
+
+                 getTimeAgo = new GetTimeAgo();
+
+                long lasttime = Long.parseLong(online);
+
+                String lastSeenTime = getTimeAgo.getTimeAgo(lasttime, getApplicationContext());
+
+                lastSeenView.setText(lastSeenTime);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
     }
 }
