@@ -133,7 +133,6 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 
-                            Log.d("CHAT LOG  -----------", databaseError.getMessage().toString());
                         }
                     });
                 }

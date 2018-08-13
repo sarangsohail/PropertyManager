@@ -1,16 +1,16 @@
 package com.example.propertymanagment;
 
-    public class Friends {
+    public class Tenants {
 
         //currently, the only value in the db
         public String date;
         public String mStatus;
 
-        public Friends(){
+        public Tenants(){
 
         }
 
-        public Friends(String date) {
+        public Tenants(String date) {
             this.date = date;
         }
 

@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (mAuth.getCurrentUser() != null) {
 
-            mUserRef = FirebaseDatabase.getInstance().getReference().child(mAuth.getCurrentUser().getUid());
+
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users")
+                    .child(mAuth.getCurrentUser().getUid());
 
         }
         mTabLayout = (TabLayout) findViewById(R.id.main_tabs);
@@ -53,15 +55,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // if the user isn't signed in, send them to the 'login activity'
+        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if (currentUser == null){
+        if(currentUser == null){
 
             sendToStartActivity();
-        }else{
+
+        } else {
+
             mUserRef.child("online").setValue("true");
+
         }
+
     }
 
     @Override

@@ -35,10 +35,11 @@
 
     <ImageView
         android:id="@+id/user_single_online_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="invisible"
-        android:src="@drawable/online_icon" />
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_alignTop="@+id/user_single_image"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/online_icon"
+        android:visibility="invisible" />
 
 </RelativeLayout>
