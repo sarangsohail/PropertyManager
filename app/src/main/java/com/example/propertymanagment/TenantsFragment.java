@@ -91,6 +91,8 @@ public class TenantsFragment extends Fragment {
 
         FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
 
+            String passedInUserName;
+            String userName;
 
             @NonNull
             @Override
@@ -104,16 +106,20 @@ public class TenantsFragment extends Fragment {
             protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull final Tenants friends) {
                 tenantsViewHolder.setDate(friends.getDate());
 
+
                 final String list_user_id = getRef(i).getKey();
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-
                         if (dataSnapshot.hasChild("name")) {
+                            userName = dataSnapshot.child("name").getValue().toString();
+                            tenantsViewHolder.setName(userName);
+                            passedInUserName = userName;
 
-                          String userName = dataSnapshot.child("name").getValue().toString();
-                          tenantsViewHolder.setName(userName);
+
+                        }else{
+                            userName = "Display Name";
 
                         }
 
@@ -123,8 +129,6 @@ public class TenantsFragment extends Fragment {
                             tenantsViewHolder.setUserOnline(userOnline);
 
                         }
-
-
 
                         tenantsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -151,9 +155,8 @@ public class TenantsFragment extends Fragment {
                                         if (i == 1) {
 
                                             Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-                                            chatIntent.putExtra("user_id", list_user_id);
-                                            //todo - can't pass through 'username'
-                                         //   chatIntent.putExtra("user_name", userName);
+                                            chatIntent.putExtra("user_id", userName);
+                                            chatIntent.putExtra("user_name", passedInUserName);
                                             startActivity(chatIntent);
 
                                         }
