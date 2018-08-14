@@ -84,6 +84,7 @@ public class TenantsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+
         FirebaseRecyclerOptions<Tenants> options =
                 new FirebaseRecyclerOptions.Builder<Tenants>()
                         .setQuery(mUsersDatabase, Tenants.class)
@@ -91,8 +92,6 @@ public class TenantsFragment extends Fragment {
 
         FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
 
-            String passedInUserName;
-            String userName;
 
             @NonNull
             @Override
@@ -100,6 +99,7 @@ public class TenantsFragment extends Fragment {
                 View view = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.users_single_layout, viewGroup, false);
                 return new TenantsViewHolder(view);
+
             }
 
             @Override
@@ -112,16 +112,9 @@ public class TenantsFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if (dataSnapshot.hasChild("name")) {
-                            userName = dataSnapshot.child("name").getValue().toString();
+
+                            final String userName = dataSnapshot.child("name").getValue().toString();
                             tenantsViewHolder.setName(userName);
-                            passedInUserName = userName;
-
-
-                        }else{
-                            userName = "Display Name";
-
-                        }
 
                         if (dataSnapshot.hasChild("online")) {
 
@@ -155,8 +148,8 @@ public class TenantsFragment extends Fragment {
                                         if (i == 1) {
 
                                             Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-                                            chatIntent.putExtra("user_id", userName);
-                                            chatIntent.putExtra("user_name", passedInUserName);
+                                            chatIntent.putExtra("user_id", list_user_id);
+                                            chatIntent.putExtra("user_name", userName);
                                             startActivity(chatIntent);
 
                                         }
