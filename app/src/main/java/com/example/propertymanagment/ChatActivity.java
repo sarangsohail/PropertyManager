@@ -5,26 +5,34 @@ import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
@@ -42,6 +50,13 @@ public class ChatActivity extends AppCompatActivity {
     private ImageButton mChatAddButton;
     private ImageButton mSendButton;
     private EditText mChatMessageView;
+
+    private RecyclerView mMessagesList;
+
+    private final List<Messages> messagesLists = new ArrayList<>();
+    private LinearLayoutManager mLinearLayout;
+    private MessageAdapter messageAdapter;
+
 
     String mCurrentUserID;
     @Override
@@ -74,7 +89,17 @@ public class ChatActivity extends AppCompatActivity {
         mSendButton = (ImageButton) findViewById(R.id.chat_send_btn);
         mChatMessageView = (EditText) findViewById(R.id.chat_message_view);
 
+        messageAdapter = new MessageAdapter(messagesLists);
 
+        mMessagesList = (RecyclerView) findViewById(R.id.messages_list);
+        mLinearLayout = new LinearLayoutManager(this);
+
+        mMessagesList.setHasFixedSize(true);
+        mMessagesList.setLayoutManager(mLinearLayout);
+
+        mMessagesList.setAdapter(messageAdapter);
+
+        loadMessages();
 
         maAuth = FirebaseAuth.getInstance();
         mCurrentUserID = maAuth.getUid();
@@ -206,4 +231,42 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
+
+    private void loadMessages() {
+
+        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserID).child(mUserChat);
+
+            //  Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_TO_LOAD);
+
+            messageRef.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                    Messages messages = dataSnapshot.getValue(Messages.class);
+                    messagesLists.add(messages);
+                    messageAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
 }
