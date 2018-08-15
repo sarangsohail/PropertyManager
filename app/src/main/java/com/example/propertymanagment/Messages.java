@@ -5,12 +5,22 @@ public class Messages {
     private String message, type;
     long time;
     boolean seen;
+    String from;
 
-    public Messages(String message, String type, long time, boolean seen) {
+    public Messages(String message, String type, long time, boolean seen, String from) {
         this.message = message;
         this.type = type;
         this.time = time;
         this.seen = seen;
+        this.from = from;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     public String getMessage() {

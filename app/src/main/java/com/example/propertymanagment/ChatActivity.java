@@ -100,13 +100,13 @@ public class ChatActivity extends AppCompatActivity {
 
         mMessagesList.setAdapter(messageAdapter);
 
-        loadMessages();
 
         maAuth = FirebaseAuth.getInstance();
         mCurrentUserID = maAuth.getUid();
         mRootRef = FirebaseDatabase.getInstance().getReference();
 
         mTitleView.setText(user_chat_name);
+        loadMessages();
 
         mRootRef.child("Users").child(mUserChat).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -128,13 +128,13 @@ public class ChatActivity extends AppCompatActivity {
 
                 }
 
-                 getTimeAgo = new GetTimeAgo();
+//                 getTimeAgo = new GetTimeAgo();
+//
+//                long lasttime = Long.parseLong(online);
+//
+//                String lastSeenTime = getTimeAgo.getTimeAgo(lasttime, getApplicationContext());
 
-                long lasttime = Long.parseLong(online);
-
-                String lastSeenTime = getTimeAgo.getTimeAgo(lasttime, getApplicationContext());
-
-                lastSeenView.setText(lastSeenTime);
+//                lastSeenView.setText(lastSeenTime);
 
             }
 
@@ -224,8 +224,7 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     });
 
-
-
+                    mChatMessageView.setText("");
                 }
 
             }
@@ -235,20 +234,18 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMessages() {
 
-        //todo - null pointer exception with the root ref
-        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserID).child(mUserChat);
+        // mRootRef.child("messages").child(mCurrentUserID).child(mUserChat);
 
-            //  Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_TO_LOAD);
 
-            messageRef.addChildEventListener(new ChildEventListener() {
+        mRootRef.child("messages").child(mCurrentUserID).child(mUserChat).addChildEventListener(new ChildEventListener() {
+
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                    if (dataSnapshot.hasChild("messages")){
                         Messages messages = dataSnapshot.getValue(Messages.class);
                         messagesLists.add(messages);
                         messageAdapter.notifyDataSetChanged();
-                    }
+
 
                 }
 
@@ -273,5 +270,6 @@ public class ChatActivity extends AppCompatActivity {
                 }
             });
         }
+
 
 }
