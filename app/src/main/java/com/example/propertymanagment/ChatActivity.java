@@ -2,6 +2,7 @@ package com.example.propertymanagment;
 
 import android.content.Context;
 import android.media.Image;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.android.gms.common.data.DataBufferObserverSet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -58,14 +62,20 @@ public class ChatActivity extends AppCompatActivity {
     private LinearLayoutManager mLinearLayout;
     private MessageAdapter messageAdapter;
 
+    private static final int TOTAL_ITEMS_TO_LOAD = 10;
+    private int currentPageNo = 1;
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     String mCurrentUserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_chat_activity);
 
-        mToolbar = (Toolbar) findViewById(R.id.chat_app_bar);
+//        mToolbar = (Toolbar) findViewById(R.id.chat_app_bar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -93,6 +103,7 @@ public class ChatActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(messagesLists);
 
         mMessagesList = (RecyclerView) findViewById(R.id.messages_list);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe_layout);
         mLinearLayout = new LinearLayoutManager(this);
 
         mMessagesList.setHasFixedSize(true);
@@ -128,13 +139,14 @@ public class ChatActivity extends AppCompatActivity {
 
                 }
 
+                //todo - sort this last seen thing out
 //                 getTimeAgo = new GetTimeAgo();
 //
 //                long lasttime = Long.parseLong(online);
 //
 //                String lastSeenTime = getTimeAgo.getTimeAgo(lasttime, getApplicationContext());
 
-//                lastSeenView.setText(lastSeenTime);
+              //  lastSeenView.setText(lastSeenTime);
 
             }
 
@@ -170,6 +182,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -183,6 +196,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sendMessage();
             }
+
 
             private void sendMessage() {
 
@@ -230,14 +244,28 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                currentPageNo++;
+
+                messagesLists.clear();
+
+                loadMessages();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
+
 
     private void loadMessages() {
 
-        // mRootRef.child("messages").child(mCurrentUserID).child(mUserChat);
+        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserID).child(mUserChat);
 
+        Query messageQuery = messageRef.limitToLast(currentPageNo * TOTAL_ITEMS_TO_LOAD);
 
-        mRootRef.child("messages").child(mCurrentUserID).child(mUserChat).addChildEventListener(new ChildEventListener() {
+        messageQuery.addChildEventListener(new ChildEventListener() {
 
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -246,6 +274,8 @@ public class ChatActivity extends AppCompatActivity {
                         messagesLists.add(messages);
                         messageAdapter.notifyDataSetChanged();
 
+                        //scroll to the latest message
+                    mMessagesList.scrollToPosition(messagesLists.size() -1);
 
                 }
 
