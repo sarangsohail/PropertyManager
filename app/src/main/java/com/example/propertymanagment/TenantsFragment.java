@@ -114,7 +114,9 @@ public class TenantsFragment extends Fragment {
 
 
                             final String userName = dataSnapshot.child("name").getValue().toString();
+                            final String userStatus = dataSnapshot.child("status").getValue().toString();
                             tenantsViewHolder.setName(userName);
+                            tenantsViewHolder.setStatus(userStatus);
 
                         if (dataSnapshot.hasChild("online")) {
 

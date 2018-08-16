@@ -101,7 +101,6 @@ public class ChatActivity extends AppCompatActivity {
         mTitleView = (TextView) findViewById(R.id.custom_chat_name);
         lastSeenView = (TextView) findViewById(R.id.custom_bar_seen);
 
-        mChatAddButton = (ImageButton) findViewById(R.id.chat_add_btn);
         mSendButton = (ImageButton) findViewById(R.id.chat_send_btn);
         mChatMessageView = (EditText) findViewById(R.id.chat_message_view);
 
