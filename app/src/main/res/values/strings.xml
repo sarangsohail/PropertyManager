@@ -5,7 +5,6 @@
     <string name="tab_chat">Chat</string>
     <string name="tab_tenants">tenants</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="chat_online_string">Online</string>
 
