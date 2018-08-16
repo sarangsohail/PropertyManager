@@ -72,6 +72,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private String mLastKey ="";
+    private String prevKey ="";
 
     String mCurrentUserID;
     @Override
@@ -274,12 +275,19 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 Messages messages = dataSnapshot.getValue(Messages.class);
-
+                String messageKey = dataSnapshot.getKey();
                 messagesLists.add(itemPos++, messages);
 
-                if (itemPos == 1){
+                //remove the repeating messages when refreshing
+                if (!prevKey.equals(messageKey)) {
 
-                    String messageKey = dataSnapshot.getKey();
+                    messagesLists.add(itemPos, messages);
+
+                }else{
+
+                    prevKey = mLastKey;
+                }
+                if (itemPos == 1){
 
                     mLastKey = messageKey;
                 }
@@ -320,7 +328,7 @@ public class ChatActivity extends AppCompatActivity {
 
         DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserID).child(mUserChat);
 
-        Query messageQuery = messageRef.limitToLast(currentPageNo * TOTAL_ITEMS_TO_LOAD);
+        final Query messageQuery = messageRef.limitToLast(currentPageNo * TOTAL_ITEMS_TO_LOAD);
 
         messageQuery.addChildEventListener(new ChildEventListener() {
 
@@ -330,13 +338,17 @@ public class ChatActivity extends AppCompatActivity {
                         Messages messages = dataSnapshot.getValue(Messages.class);
 
                         itemPos++;
+                        String messageKey = dataSnapshot.getKey();
 
-                        if (itemPos == 1){
 
-                            String messageKey = dataSnapshot.getKey();
+                    if (itemPos == 1){
 
-                            mLastKey = messageKey;
-                        }
+
+                        mLastKey = messageKey;
+                        prevKey = messageKey;
+                    }
+
+
 
 
                         messagesLists.add(messages);
