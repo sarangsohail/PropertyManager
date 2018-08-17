@@ -2,6 +2,7 @@ package com.example.propertymanagment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,7 +46,6 @@ public class ChatFragment extends Fragment {
     private String mCurrent_user_id;
 
     private View mMainView;
-
 
     DatabaseReference mUserRef;
 
@@ -71,6 +72,7 @@ public class ChatFragment extends Fragment {
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
 
+        mMessageDatabase = FirebaseDatabase.getInstance().getReference().child("messages").child(mCurrent_user_id);
         mConvList.setHasFixedSize(true);
         mConvList.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -89,13 +91,13 @@ public class ChatFragment extends Fragment {
                         .setQuery(conversationQuery, Conv.class)
                         .build();
 
-      FirebaseRecyclerAdapter<Conv, ConvViewHolder> adapter =
+      FirebaseRecyclerAdapter adapter =
               new FirebaseRecyclerAdapter<Conv, ConvViewHolder>(options) {
 
           @NonNull
           @Override
           public ConvViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-              View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_chat, viewGroup, false);
+              View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_single_layout, viewGroup, false);
               return new ConvViewHolder(view);
           }
 
@@ -133,14 +135,57 @@ public class ChatFragment extends Fragment {
                   public void onCancelled(DatabaseError databaseError) {
 
                   }
-
               });
+
+
+              mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                  @Override
+                  public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                      if (dataSnapshot.hasChild("name")) {
+
+                          final String userName = dataSnapshot.child("name").getValue().toString();
+                          holder.setName(userName);
+
+                      }
+
+//                      String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+
+                      if(dataSnapshot.hasChild("online")) {
+
+                          String userOnline = dataSnapshot.child("online").getValue().toString();
+                          holder.setUserOnline(userOnline);
+
+                      }
+
+            //         holder.setUserImage(userThumb, getContext());
+
+                      holder.mView.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+
+
+                              Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                              chatIntent.putExtra("user_id", list_user_id);
+//                              chatIntent.putExtra("user_name", userName);
+                              startActivity(chatIntent);
+
+                          }
+                      });
+                  }
+
+                  @Override
+                  public void onCancelled(DatabaseError databaseError) {
+
+                  }
+              });
+
           }
+              };
 
-      };
-
-      mConvList.setAdapter(adapter);
-      adapter.startListening();
+        mConvList.setAdapter(adapter);
+        adapter.startListening();
 
     }
 
