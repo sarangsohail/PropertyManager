@@ -27,14 +27,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TenantsFragment extends Fragment {
 
     private static final String TAG = "FriendsFragment";
@@ -106,29 +102,35 @@ public class TenantsFragment extends Fragment {
             protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull final Tenants friends) {
                 tenantsViewHolder.setDate(friends.getDate());
 
-
                 final String list_user_id = getRef(i).getKey();
+
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                            Log.d(TAG, "in the tenants fragment + bind view holder");
                             final String userName = dataSnapshot.child("name").getValue().toString();
                             final String userStatus = dataSnapshot.child("status").getValue().toString();
+
+                            // String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+
+                            if (dataSnapshot.hasChild("online")) {
+
+                                String userOnline = dataSnapshot.child("online").getValue().toString();
+                                tenantsViewHolder.setUserOnline(userOnline);
+
+                            }
+
+                            Log.d("TAG", "before setting the name and status");
                             tenantsViewHolder.setName(userName);
                             tenantsViewHolder.setStatus(userStatus);
-
-                        if (dataSnapshot.hasChild("online")) {
-
-                            String userOnline = dataSnapshot.child("online").getValue().toString();
-                            tenantsViewHolder.setUserOnline(userOnline);
-
-                        }
+                            // friendsViewHolder.setUserImage(userThumb, getContext());
 
                         tenantsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
+                                //on user click options
                                 CharSequence options[] = new CharSequence[]{"Open Profile", "Send message"};
 
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -138,7 +140,7 @@ public class TenantsFragment extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                                        //Click event for each item when pressed on tenant
+                                        //event for each option user clicks on the user
                                         if (i == 0) {
 
                                             Intent profileIntent = new Intent(getContext(), ProfileActivity.class);
@@ -151,25 +153,22 @@ public class TenantsFragment extends Fragment {
 
                                             Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                             chatIntent.putExtra("user_id", list_user_id);
-                                            chatIntent.putExtra("user_name", userName);
+                                            // chatIntent.putExtra("user_name", userName);
                                             startActivity(chatIntent);
 
                                         }
 
                                     }
                                 });
-
                                 builder.show();
-
                             }
                         });
-
-
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
+                        Log.d("database error", databaseError.toString());
                     }
                 });
 
@@ -213,12 +212,12 @@ public class TenantsFragment extends Fragment {
         }
 
         //yet to do
-        public void setUserImage(String thumb_image, Context ctx){
-
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.get().load(thumb_image).placeholder(R.drawable.default_profile_pic).into(userImageView);
-
-        }
+//        public void setUserImage(String thumb_image, Context ctx){
+//
+//            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+//            Picasso.get().load(thumb_image).placeholder(R.drawable.default_profile_pic).into(userImageView);
+//
+//        }
         public void setUserOnline(String online_status) {
 
             ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);

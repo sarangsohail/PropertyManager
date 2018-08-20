@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class ChatFragment extends Fragment {
 
+    private static final String TAG = "CHAT FRAGMENT" ;
     private RecyclerView mConvList;
 
     private DatabaseReference mConvDatabase;
@@ -57,26 +59,30 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        mMainView = inflater.inflate(
-                R.layout.fragment_chat, container, false);
+        mMainView = inflater.inflate(R.layout.fragment_chat, container, false);
 
         mConvList = (RecyclerView) mMainView.findViewById(R.id.conv_list);
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
 
-
         mConvDatabase = FirebaseDatabase.getInstance().getReference().child("Chat").child(mCurrent_user_id);
+
         mConvDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mMessageDatabase = FirebaseDatabase.getInstance().getReference().child("messages").child(mCurrent_user_id);
         mUsersDatabase.keepSynced(true);
 
-        mMessageDatabase = FirebaseDatabase.getInstance().getReference().child("messages").child(mCurrent_user_id);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+
         mConvList.setHasFixedSize(true);
-        mConvList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mConvList.setLayoutManager(linearLayoutManager);
 
         return mMainView;
+
     }
 
     @Override
@@ -91,28 +97,35 @@ public class ChatFragment extends Fragment {
                         .setQuery(conversationQuery, Conv.class)
                         .build();
 
-      FirebaseRecyclerAdapter adapter =
+        FirebaseRecyclerAdapter<Conv, ConvViewHolder> adapter =
               new FirebaseRecyclerAdapter<Conv, ConvViewHolder>(options) {
 
           @NonNull
           @Override
           public ConvViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
               View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_single_layout, viewGroup, false);
+
               return new ConvViewHolder(view);
+
           }
 
           @Override
           protected void onBindViewHolder(@NonNull final ConvViewHolder holder, int position, @NonNull final Conv model) {
+
+
               final String list_user_id = getRef(position).getKey();
 
               Query lastMessageQuery = mMessageDatabase.child(list_user_id).limitToLast(1);
+              Log.d(TAG, " AFTER THE 'LAST QUERY MESSAGE'---- ");
 
               lastMessageQuery.addChildEventListener(new ChildEventListener() {
                   @Override
                   public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                      Log.d(TAG, " BEFORE ---- IN THE DATA SNAPSHOT ");
 
                       String data = dataSnapshot.child("message").getValue().toString();
                       holder.setMessage(data, model.isSeen());
+                      Log.d(TAG, " AFTER ---- IN THE DATA SNAPSHOT ");
 
                   }
 
@@ -137,7 +150,7 @@ public class ChatFragment extends Fragment {
                   }
               });
 
-
+              Log.d(TAG, " BEFORE THE M USER DATABASE");
               mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                   @Override
                   public void onDataChange(DataSnapshot dataSnapshot) {
@@ -145,6 +158,7 @@ public class ChatFragment extends Fragment {
 
                       if (dataSnapshot.hasChild("name")) {
 
+                          Log.d(TAG, " BEFORE ---- DATASNAPSHOT NAME CHILD");
                           final String userName = dataSnapshot.child("name").getValue().toString();
                           holder.setName(userName);
 
@@ -159,7 +173,7 @@ public class ChatFragment extends Fragment {
 
                       }
 
-            //         holder.setUserImage(userThumb, getContext());
+                      //         holder.setUserImage(userThumb, getContext());
 
                       holder.mView.setOnClickListener(new View.OnClickListener() {
                           @Override
@@ -221,12 +235,6 @@ public class ChatFragment extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
-
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.get().load(thumb_image).placeholder(R.drawable.default_profile_pic).into(userImageView);
-
-        }
 
         public void setUserOnline(String online_status) {
 

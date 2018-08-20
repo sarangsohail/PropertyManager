@@ -2,7 +2,6 @@ package com.example.propertymanagment;
 
     public class Tenants {
 
-        //currently, the only value in the db
         public String date;
         public String mStatus;
 
@@ -10,8 +9,9 @@ package com.example.propertymanagment;
 
         }
 
-        public Tenants(String date) {
+        public Tenants(String date, String mStatus) {
             this.date = date;
+            this.mStatus = mStatus;
         }
 
         public String getDate() {
@@ -25,7 +25,6 @@ package com.example.propertymanagment;
         public String getmStatus() {
             return mStatus;
         }
-
 
         public void setmStatus(String mStatus) {
             this.mStatus = mStatus;

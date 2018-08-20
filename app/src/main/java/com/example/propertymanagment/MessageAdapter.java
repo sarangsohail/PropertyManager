@@ -6,9 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -18,69 +25,98 @@ import de.hdodenhof.circleimageview.CircleImageView;
 //adapter to get the messages from the db
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
 
-    private List<Messages> messagesList;
-    private FirebaseAuth firebaseAuth;
+    private List<Messages> mMessageList;
+    private DatabaseReference mUserDatabase;
 
-    public MessageAdapter(List<Messages> messagesList){
+    public MessageAdapter(List<Messages> mMessageList) {
 
-        this.messagesList = messagesList;
+        this.mMessageList = mMessageList;
 
     }
 
     @Override
-    public MessageAdapter.MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.message_single_layout, viewGroup, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.message_single_layout ,parent, false);
 
-        return new MessageViewHolder(view);
+        return new MessageViewHolder(v);
+
+    }
+
+    public class MessageViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView messageText;
+        public CircleImageView profileImage;
+        public TextView displayName;
+        public ImageView messageImage;
+
+        public MessageViewHolder(View view) {
+            super(view);
+
+            messageText = (TextView) view.findViewById(R.id.message_text_layout);
+            profileImage = (CircleImageView) view.findViewById(R.id.message_profile_layout);
+            displayName = (TextView) view.findViewById(R.id.user_single_name);
+           messageImage = (ImageView) view.findViewById(R.id.user_single_image);
+
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageAdapter.MessageViewHolder messageViewHolder, int i) {
+    public void onBindViewHolder(final MessageViewHolder viewHolder, int i) {
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        String mCurrentUser = firebaseAuth.getCurrentUser().getUid();
+        Messages c = mMessageList.get(i);
 
-        Messages messages = messagesList.get(i);
-        messageViewHolder.messageText.setText(messages.getMessage());
-//        messageViewHolder.mProfilePic.setImage
-
-        String from_user  = messages.getFrom();
-
-        //this is me sending the message
-        if (mCurrentUser.equals(from_user)){
-
-            messageViewHolder.messageText.setBackgroundColor(Color.parseColor("#ffffff"));
-            messageViewHolder.messageText.setTextColor(Color.BLACK);
+        String from_user = c.getFrom();
+        String message_type = c.getType();
 
 
-        }else {
-            //message from tenant
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(from_user);
 
-            messageViewHolder.messageText.setBackgroundResource(R.drawable.message_text_bg);
-            messageViewHolder.messageText.setTextColor(Color.WHITE);
+        mUserDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String name = dataSnapshot.child("name").getValue().toString();
+                String image = dataSnapshot.child("thumb_image").getValue().toString();
+
+                viewHolder.displayName.setText(name);
+
+                Picasso.get().load(image)
+                        .placeholder(R.drawable.default_profile_pic).into(viewHolder.profileImage);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        if(message_type.equals("text")) {
+
+            viewHolder.messageText.setText(c.getMessage());
+            viewHolder.messageImage.setVisibility(View.INVISIBLE);
+
+
+        } else {
+
+            viewHolder.messageText.setVisibility(View.INVISIBLE);
+            Picasso.get().load(c.getMessage())
+                    .placeholder(R.drawable.default_profile_pic).into(viewHolder.messageImage);
+
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return messagesList.size();
+        return mMessageList.size();
     }
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView messageText;
-        public CircleImageView mProfilePic;
 
-        public MessageViewHolder(@NonNull View itemView) {
-            super(itemView);
 
-            messageText = (TextView) itemView.findViewById(R.id.message_text_layout);
-            mProfilePic = (CircleImageView) itemView.findViewById(R.id.message_profile_layout);
-            }
-    }
 
 
 }

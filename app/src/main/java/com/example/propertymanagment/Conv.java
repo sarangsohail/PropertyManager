@@ -5,12 +5,12 @@ public class Conv {
     //model for landlord and tenant's conversation
 
     public boolean seen;
-    public long timeStamp;
+    public long timestamp;
 
     public Conv(){
 
-
     }
+
     public boolean isSeen() {
         return seen;
     }
@@ -19,17 +19,16 @@ public class Conv {
         this.seen = seen;
     }
 
-    public long getTimeStamp() {
-        return timeStamp;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public Conv(boolean seen, long timeStamp) {
-
+    public Conv(boolean seen, long timestamp) {
         this.seen = seen;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
     }
 }
