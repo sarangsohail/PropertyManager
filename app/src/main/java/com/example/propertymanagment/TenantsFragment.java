@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LongDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,12 +56,11 @@ public class TenantsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        mMainView = inflater.inflate(
-                R.layout.activity_friends_fragment, container, false);
+        mMainView = inflater.inflate(R.layout.activity_friends_fragment, container, false);
 
-        mFriendsList = (RecyclerView) mMainView.findViewById(R.id.friendsRV);
+            mFriendsList = (RecyclerView) mMainView.findViewById(R.id.friendsRV);
+
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
@@ -86,7 +86,8 @@ public class TenantsFragment extends Fragment {
                         .setQuery(mUsersDatabase, Tenants.class)
                         .build();
 
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
+        FirebaseRecyclerAdapter<Tenants, TenantsViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
 
 
             @NonNull
@@ -99,7 +100,7 @@ public class TenantsFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull final Tenants friends) {
+            protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull Tenants friends) {
                 tenantsViewHolder.setDate(friends.getDate());
 
                 final String list_user_id = getRef(i).getKey();
@@ -108,23 +109,22 @@ public class TenantsFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            Log.d(TAG, "in the tenants fragment + bind view holder");
                             final String userName = dataSnapshot.child("name").getValue().toString();
                             final String userStatus = dataSnapshot.child("status").getValue().toString();
 
-                            // String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
 
                             if (dataSnapshot.hasChild("online")) {
 
                                 String userOnline = dataSnapshot.child("online").getValue().toString();
                                 tenantsViewHolder.setUserOnline(userOnline);
 
+                            }else {
+                                tenantsViewHolder.setUserOnline("offline");
                             }
 
-                            Log.d("TAG", "before setting the name and status");
-                            tenantsViewHolder.setName(userName);
                             tenantsViewHolder.setStatus(userStatus);
-                            // friendsViewHolder.setUserImage(userThumb, getContext());
+                        // friendsViewHolder.setUserImage(userThumb, getContext());
+                        tenantsViewHolder.setName(userName);
 
                         tenantsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override

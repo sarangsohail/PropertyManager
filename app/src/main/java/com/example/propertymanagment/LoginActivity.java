@@ -3,11 +3,9 @@ package com.example.propertymanagment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -83,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     String current_user_id = mAuth.getCurrentUser().getUid();
                     String deviceToken = FirebaseInstanceId.getInstance().getToken();
-
+                    final String current_user_name = mAuth.getCurrentUser().getUid();
 
                     mUserDatabase.child(current_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -91,14 +89,13 @@ public class LoginActivity extends AppCompatActivity {
                             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                             //stops the activity from going back to previous activity
                             mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
+                            mainIntent.putExtra("user_name",current_user_name );
                             startActivity(mainIntent);
 
                             finish();
 
                         }
                     });
-
 
                 }else{
                     spinner.setVisibility(View.INVISIBLE);

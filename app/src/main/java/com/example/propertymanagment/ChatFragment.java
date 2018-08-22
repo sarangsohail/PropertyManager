@@ -103,7 +103,8 @@ public class ChatFragment extends Fragment {
           @NonNull
           @Override
           public ConvViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-              View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_single_layout, viewGroup, false);
+              View view = LayoutInflater.from(viewGroup.getContext())
+                      .inflate(R.layout.fragment_chat, viewGroup, false);
 
               return new ConvViewHolder(view);
 
