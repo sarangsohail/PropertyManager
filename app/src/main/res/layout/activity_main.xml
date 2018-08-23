@@ -20,10 +20,11 @@ android:id="@+id/ll">
     <android.support.v7.widget.CardView
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:id="@+id/bankcardId"
+        android:id="@+id/add_property_main"
         android:layout_width="160dp"
         android:layout_height="190dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,7 +41,7 @@ android:id="@+id/ll">
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="Banking"/>
+                android:text="Add Property"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -50,7 +51,7 @@ android:id="@+id/ll">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Check your bank activities"
+                android:text="Add a new property to your portfolio"
                 android:padding="5dp"
                 android:textColor="@android:color/darker_gray"/>
 
@@ -61,7 +62,8 @@ android:id="@+id/ll">
         android:clickable="true"
         android:layout_width="160dp"
         android:layout_height="190dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:id="@+id/finance_option_main">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,7 +80,7 @@ android:id="@+id/ll">
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="Ideas"/>
+                android:text="Finance"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -88,7 +90,7 @@ android:id="@+id/ll">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Check your bank activities"
+                android:text="Manage your finances"
                 android:padding="5dp"
                 android:textColor="@android:color/darker_gray"/>
 
@@ -107,7 +109,9 @@ android:id="@+id/ll">
         android:clickable="true"
         android:layout_width="160dp"
         android:layout_height="190dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:id="@+id/add_tenant_option_main"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -124,7 +128,7 @@ android:id="@+id/ll">
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="Add"/>
+                android:text="Add Tenant"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -134,7 +138,7 @@ android:id="@+id/ll">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Check your bank activities"
+                android:text="Add or manage you tenants"
                 android:padding="5dp"
                 android:textColor="@android:color/darker_gray"/>
 
@@ -145,7 +149,8 @@ android:id="@+id/ll">
         android:clickable="true"
         android:layout_width="160dp"
         android:layout_height="190dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:id="@+id/message_option_main">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -164,7 +169,7 @@ android:id="@+id/ll">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Links"
+                android:text="Messenger"
                 android:textStyle="bold" />
 
             <View
@@ -178,7 +183,7 @@ android:id="@+id/ll">
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Check your bank activities"
+                android:text="Contact your tenants"
                 android:textColor="@android:color/darker_gray" />
 
         </LinearLayout>
@@ -196,7 +201,8 @@ android:id="@+id/ll">
         android:clickable="true"
         android:layout_width="340dp"
         android:layout_height="150dp"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:id="@+id/emergency_option_main">
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -214,7 +220,7 @@ android:id="@+id/ll">
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="Add"/>
+                android:text="Emergency"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -224,13 +230,12 @@ android:id="@+id/ll">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Check your bank activities"
+                android:text="Report maintenance and emergencies"
                 android:padding="5dp"
                 android:textColor="@android:color/darker_gray"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 
 </LinearLayout>
 </LinearLayout>
