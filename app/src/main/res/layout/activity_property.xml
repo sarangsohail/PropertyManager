@@ -6,10 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".PropertyActivity">
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="wesgew"
-        android:id="@+id/propertyNameTV"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="34dp"
+        android:paddingTop="5dp"
+        android:text="House No. *"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp">
+
+        <EditText
+            android:id="@+id/prop_house_number_et"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/rounded_edit_text"
+            android:paddingLeft="4dp"
+            android:text="" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="117dp">
+
+        <EditText
+            android:id="@+id/prop_street_et"
+            android:layout_width="369dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            tools:text="150 Test Street"
+            android:layout_marginLeft="4dp"
+            android:paddingLeft="4dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/rounded_edit_text"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="191dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="egbweg"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="238dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="egbweg"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
 </RelativeLayout>
