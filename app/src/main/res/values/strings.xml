@@ -7,4 +7,24 @@
 
     <string name="chat_online_string">Online</string>
 
+        <string-array name="payment_frequency_array_add_prop">
+            <item>Weekly</item>
+            <item>Monthly</item>
+            <item>Quarterly</item>
+            <item>Annually</item>
+        </string-array>
+
+    <string-array name="bedroom_add_prop">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11+ </item>
+    </string-array>
 </resources>
