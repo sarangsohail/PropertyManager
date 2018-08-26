@@ -32,11 +32,9 @@ public class MainActivity extends AppCompatActivity  {
         String user_name = userNameIntent.getStringExtra("user_name");
 
         if (user_name == null){
-            getSupportActionBar().setTitle("Welcome");
-
+            sendToStartActivity();
         }else{
-            getSupportActionBar().setTitle("Welcome, " + user_name);
-
+            getSupportActionBar().setTitle("Welcome");
         }
 
         //onclick listeners for the main options in main activity
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity  {
     private void sendToStartActivity() {
 
         Intent startIntent = new Intent(
-                MainActivity.this, LoginActivity.class);
+                MainActivity.this, StartActivity.class);
         startActivity(startIntent);
         finish();
     }

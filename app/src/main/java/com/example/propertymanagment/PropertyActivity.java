@@ -1,7 +1,9 @@
 package com.example.propertymanagment;
 
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,6 +20,8 @@ public class PropertyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_property);
 
         getSupportActionBar().setTitle("Add Property");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mPropertyName = (EditText) findViewById(R.id.prop_street_et);
 
         //all the spinners for the 'add property' class
@@ -35,5 +39,7 @@ public class PropertyActivity extends AppCompatActivity {
         bedroomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bedroomSpinner.setAdapter(bedroomSpinnerAdapter);
 
+
     }
+
 }

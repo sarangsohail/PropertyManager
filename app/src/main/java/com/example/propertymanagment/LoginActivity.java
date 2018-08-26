@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     mUserDatabase.child(current_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+
                             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                             //stops the activity from going back to previous activity
                             mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
