@@ -59,7 +59,9 @@
         <activity
             android:name=".ChatActivity"
             android:parentActivityName=".MessagingMainActivity" />
-        <activity android:name=".PropertyActivity"></activity>
+        <activity android:name=".PropertyActivity">
+
+        </activity>
     </application>
 
 </manifest>

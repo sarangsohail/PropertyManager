@@ -28,6 +28,8 @@ public class PropertyActivity extends AppCompatActivity {
 
         Spinner paymentSpinner = (Spinner) findViewById(R.id.payment_frequency_spinner);
         Spinner bedroomSpinner = (Spinner) findViewById(R.id.bedroom_spinner_add_prop);
+        Spinner bathroomSpinner = (Spinner) findViewById(R.id.bathroom_spinner_add_prop);
+
         ArrayAdapter<CharSequence> paymentSpinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.payment_frequency_array_add_prop, android.R.layout.simple_spinner_item);
         paymentSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -38,6 +40,11 @@ public class PropertyActivity extends AppCompatActivity {
                 R.array.bedroom_add_prop, android.R.layout.simple_spinner_item);
         bedroomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bedroomSpinner.setAdapter(bedroomSpinnerAdapter);
+
+        ArrayAdapter<CharSequence> bathroomSpinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.bathroom_add_prop, android.R.layout.simple_spinner_item);
+        bedroomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bathroomSpinner.setAdapter(bedroomSpinnerAdapter);
 
 
     }
