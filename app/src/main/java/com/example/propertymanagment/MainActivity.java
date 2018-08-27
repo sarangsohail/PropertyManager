@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,19 +24,28 @@ public class MainActivity extends AppCompatActivity  {
 
     private CardView mProperty, mFinance, mTenant, mChat, mEmergency;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //get user display name
         Intent userNameIntent = getIntent();
         String user_name = userNameIntent.getStringExtra("user_name");
 
-        if (user_name == null){
-            sendToStartActivity();
-        }else{
+//        if (user_name == null){
+//            sendToStartActivity();
+//        }else{
+//            getSupportActionBar().setTitle("Welcome");
+//        }
+
+        if (user != null) {
             getSupportActionBar().setTitle("Welcome");
+        }else{
+            sendToStartActivity();
         }
+
 
         //onclick listeners for the main options in main activity
         mProperty = (CardView) findViewById(R.id.add_property_main);

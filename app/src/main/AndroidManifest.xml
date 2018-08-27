@@ -62,6 +62,9 @@
         <activity android:name=".PropertyActivity">
 
         </activity>
+        <activity android:name=".AllProperties">
+
+        </activity>
     </application>
 
 </manifest>
