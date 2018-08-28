@@ -57,4 +57,36 @@ class DatabaseHelper extends SQLiteOpenHelper{
         return data;
 
     }
+
+     public Cursor getItemId(String houseNo){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "SELECT " + COL0 + " FROM " + TABLE_NAME +
+                 " WHERE " + COL1 + " = '" + houseNo + "'";
+
+        Cursor data = sqLiteDatabase.rawQuery(query, null);
+        return data;
+     }
+
+
+     //update values for the house number
+    public void updateNumber(String newNumber, int id, String oldNumber){
+        SQLiteDatabase databaseHelper = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME + " SET " + COL1 +
+                " = '" + newNumber + "' WHERE " + COL0 + " = '" + id + "'" +
+                " AND " + COL1 + " = '" + oldNumber + "'";
+
+        databaseHelper.execSQL(query);
+    }
+
+    public void deleteNumber(int id, String number){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
+                + COL0 + " = '" + id + "'" +
+                " AND " + COL1 + " = '" + number + "'";
+
+        sqLiteDatabase.execSQL(query);
+
+    }
+
 }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/houseNo_tv_editProp"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="House No."
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/houseNumber_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:paddingTop="15dp"
+                android:textSize="25dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/currencyPriceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="Price: "
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/currencyPriceBig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="15dp"
+                android:textSize="25dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/currencySymbolTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="Symbol: "
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/currencySymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="15dp"
+                android:textSize="25dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/currencyCirculationSupplyTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="Circulation Supply: "
+                android:textSize="25dp" />
+            //currency supply is the current circulation supply
+
+            <TextView
+                android:id="@+id/currencySupply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="17dp"
+                android:textSize="18dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/currencyRankTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="Rank: "
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/currencyRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25dp" />
+        </TableRow>
+
+        <TableRow>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/currency24HVolumeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="24H Volume: "
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/currency24Volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+
+                />
+        </TableRow>
+
+        <TableRow>
+
+        </TableRow>
+
+        <TextView
+            android:id="@+id/currencyTotalSupply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/currencyMaxSupply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp" />
+
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/saveButton_editProp"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/deleteButton_editProp"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:text="Delete" />
+
+</LinearLayout>

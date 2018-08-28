@@ -62,7 +62,10 @@
         <activity android:name=".PropertyActivity">
 
         </activity>
-        <activity android:name=".AllProperties">
+        <activity android:name=".AllProperties" android:parentActivityName=".PropertyActivity">
+
+        </activity>
+        <activity android:name=".EditPropertyActivity" android:parentActivityName=".AllProperties">
 
         </activity>
     </application>
