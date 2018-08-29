@@ -70,7 +70,7 @@ public class AllProperties extends AppCompatActivity {
                 newAddress = getIntent.getStringExtra("address");
                 newTown = getIntent.getStringExtra("town");
 
-                //todo - pass in the right values using the 'get' value method in the db
+                //todo - pass in the right values using the 'get' value method in the db..
                 //error handling, check if data is returned
                 while (houseItemCursor.moveToNext()){
                    int houseItemCursorInt = houseItemCursor.getInt(0);
