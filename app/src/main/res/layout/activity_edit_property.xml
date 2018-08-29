@@ -37,16 +37,16 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/currencyPriceTV"
+                android:id="@+id/postcode_editProperty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Price: "
+                android:text="Postcode"
                 android:textSize="25dp" />
 
-            <TextView
-                android:id="@+id/currencyPriceBig"
+            <EditText
+                android:id="@+id/postcode_editProperty_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -57,16 +57,16 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/currencySymbolTV"
+                android:id="@+id/address_property_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Symbol: "
+                android:text="Address "
                 android:textSize="25dp" />
 
-            <TextView
-                android:id="@+id/currencySymbol"
+            <EditText
+                android:id="@+id/property_address_edit_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -77,17 +77,15 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/currencyCirculationSupplyTV"
+                android:id="@+id/property_town"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Circulation Supply: "
+                android:text="City/Town "
                 android:textSize="25dp" />
-            //currency supply is the current circulation supply
-
-            <TextView
-                android:id="@+id/currencySupply"
+            <EditText
+                android:id="@+id/property_town_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -98,16 +96,16 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/currencyRankTV"
+                android:id="@+id/rent_edit_property_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Rank: "
+                android:text="Rent"
                 android:textSize="25dp" />
 
-            <TextView
-                android:id="@+id/currencyRank"
+            <EditText
+                android:id="@+id/property_rent_editProp_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -120,40 +118,40 @@
 
         <TableRow>
 
-            <TextView
-                android:id="@+id/currency24HVolumeTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:text="24H Volume: "
-                android:textSize="25dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:paddingTop="15dp"-->
+                <!--android:text="24H Volume: "-->
+                <!--android:textSize="25dp" />-->
 
-            <TextView
-                android:id="@+id/currency24Volume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="20dp"
+            <!--<EditText-->
+                <!--android:id="@+id/currency24Volume"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:textSize="20dp"-->
 
-                />
+                <!--/>-->
         </TableRow>
 
         <TableRow>
 
         </TableRow>
 
-        <TextView
-            android:id="@+id/currencyTotalSupply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/currencyTotalSupply"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="30dp" />-->
 
-        <TextView
-            android:id="@+id/currencyMaxSupply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp" />
+        <!--<TextView-->
+            <!--android:id="@+id/currencyMaxSupply"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="30dp" />-->
 
 
     </TableLayout>
@@ -162,6 +160,7 @@
         android:id="@+id/saveButton_editProp"
         android:layout_width="177dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
         android:layout_marginLeft="110dp"
         android:text="Save" />
 

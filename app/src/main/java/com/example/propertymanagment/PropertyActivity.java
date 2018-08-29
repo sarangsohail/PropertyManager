@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,13 +23,16 @@ import java.util.ArrayList;
 
 public class PropertyActivity extends AppCompatActivity {
 
-    private EditText mPropertyName;
     DatabaseHelper databaseHelper;
 
     //property views
      Button saveButton;
      Button all_Prop_button;
      EditText house_number_view;
+     EditText postcode_number_view;
+     EditText address_number_view;
+     EditText town_number_view;
+     EditText rent_number_view;
 
 
     @Override
@@ -39,10 +43,13 @@ public class PropertyActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Add Property");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mPropertyName = (EditText) findViewById(R.id.prop_street_et);
-
         //all editext referencing
         house_number_view = (EditText) findViewById(R.id.prop_house_number_et);
+        postcode_number_view = (EditText) findViewById(R.id.postcode_add_prop);
+        address_number_view = (EditText) findViewById(R.id.prop_street_et);
+        town_number_view = (EditText) findViewById(R.id.city_town_et);
+        rent_number_view = (EditText) findViewById(R.id.rent_add_prop);
+
         saveButton = (Button) findViewById(R.id.prop_button_save);
         all_Prop_button = (Button) findViewById(R.id.view_all_properties_button);
 
@@ -77,10 +84,18 @@ public class PropertyActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String newHouseNo = house_number_view.getText().toString();
+                String newPostcode = postcode_number_view.getText().toString();
+                String newAddress = address_number_view.getText().toString();
+                String newTown = town_number_view.getText().toString();
+//                String newRent = Integer.toString(rent_number_view.getText().toString())
 
-                if (newHouseNo.length() != 0){
-                    AddData(newHouseNo);
+                if (newHouseNo.length() != 0 && newPostcode.length() != 0 && newAddress.length() != 0 && newTown.length() != 0){
+                    AddData(newHouseNo, newPostcode, newAddress, newTown);
                     house_number_view.setText("");
+                    postcode_number_view.setText("");
+                    address_number_view.setText("");
+                    town_number_view.setText("");
+                    Toast.makeText(PropertyActivity.this, "Log.D, Data should be added", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(PropertyActivity.this, "problem sending storing your data", Toast.LENGTH_SHORT).show();
                 }
@@ -90,21 +105,25 @@ public class PropertyActivity extends AppCompatActivity {
         all_Prop_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent allPropertiesIntent = new Intent(PropertyActivity.this, AllProperties.class);
-                startActivity(allPropertiesIntent);
+
+                    Intent allPropertiesIntent = new Intent(PropertyActivity.this, AllProperties.class);
+                    startActivity(allPropertiesIntent);
+
+
             }
         });
     }
 
 
 
-    public void AddData(String newEntry){
-        boolean insertData =  databaseHelper.addData(newEntry);
+    public void AddData(String houseNo, String postcode, String address, String town){
+        boolean insertData =  databaseHelper.addData(houseNo, postcode, address, town);
 
         if (insertData){
             Toast.makeText(this, "Data Successfully Added", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
         }
 
     }

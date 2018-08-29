@@ -33,7 +33,6 @@ public class MessagingMainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Chats");
 
-
         if (mAuth.getCurrentUser() != null) {
 
 

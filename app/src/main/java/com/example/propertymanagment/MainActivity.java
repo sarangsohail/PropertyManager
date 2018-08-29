@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
+                Intent loadMessagingActivity = new Intent(MainActivity.this, MessagingMainActivity.class);
+                startActivity(loadMessagingActivity);
             }
         });
         mEmergency.setOnClickListener(new View.OnClickListener() {

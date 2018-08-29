@@ -56,6 +56,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".MessagingMainActivity"></activity>
         <activity
             android:name=".ChatActivity"
             android:parentActivityName=".MessagingMainActivity" />
