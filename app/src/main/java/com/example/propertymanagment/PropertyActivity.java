@@ -38,6 +38,7 @@ public class PropertyActivity extends AppCompatActivity {
     String newPostcode;
     String newAddress;
     String newTown;
+    String newRent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class PropertyActivity extends AppCompatActivity {
         postcode_number_view = (EditText) findViewById(R.id.postcode_add_prop);
         address_number_view = (EditText) findViewById(R.id.prop_street_et);
         town_number_view = (EditText) findViewById(R.id.city_town_et);
-        rent_number_view = (EditText) findViewById(R.id.rent_add_prop);
+        rent_number_view = (EditText) findViewById(R.id.property_rent_editProp_et);
 
         saveButton = (Button) findViewById(R.id.prop_button_save);
         all_Prop_button = (Button) findViewById(R.id.view_all_properties_button);
@@ -90,15 +91,17 @@ public class PropertyActivity extends AppCompatActivity {
                  newPostcode = postcode_number_view.getText().toString();
                  newAddress = address_number_view.getText().toString();
                  newTown = town_number_view.getText().toString();
+                 newRent = rent_number_view.getText().toString();
 //                String newRent = Integer.toString(rent_number_view.getText().toString())
 
-                if (newHouseNo.length() != 0 && newPostcode.length() != 0 && newAddress.length() != 0 && newTown.length() != 0){
-                    AddData(newHouseNo, newPostcode, newAddress, newTown);
+                if (newHouseNo.length() != 0 && newPostcode.length() != 0 && newAddress.length() != 0 && newTown.length() != 0 && newRent.length() != 0){
+                    AddData(newHouseNo, newPostcode, newAddress, newTown, newRent);
 
                     house_number_view.setText("");
                     postcode_number_view.setText("");
                     address_number_view.setText("");
                     town_number_view.setText("");
+                    rent_number_view.setText("");
 
                 }else{
                     Toast.makeText(PropertyActivity.this, "problem sending storing your data", Toast.LENGTH_SHORT).show();
@@ -114,7 +117,7 @@ public class PropertyActivity extends AppCompatActivity {
                     allPropertiesIntent.putExtra("postcode", newPostcode);
                     allPropertiesIntent.putExtra("address", newAddress);
                     allPropertiesIntent.putExtra("town", newTown);
-
+                    allPropertiesIntent.putExtra("town", newRent);
                     startActivity(allPropertiesIntent);
 
 
@@ -124,14 +127,14 @@ public class PropertyActivity extends AppCompatActivity {
 
 
 
-    public void AddData(String houseNo, String postcode, String address, String town){
-        boolean insertData =  databaseHelper.addData(houseNo, postcode, address, town);
+    public void AddData(String houseNo, String postcode, String address, String town, String rent){
+        boolean insertData =  databaseHelper.addData(houseNo, postcode, address, town, rent);
 
         if (insertData){
-            Toast.makeText(this, "Data Successfully Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Property Successfully Added", Toast.LENGTH_SHORT).show();
 
         }else{
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "A problem occurred with your input, however data was inputted!", Toast.LENGTH_SHORT).show();
 
         }
 

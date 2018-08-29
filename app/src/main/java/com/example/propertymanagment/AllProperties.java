@@ -22,6 +22,7 @@ public class AllProperties extends AppCompatActivity {
     String newPostcode;
     String newAddress;
     String newTown;
+    String newRent;
     private ListView mListView;
 
     @Override
@@ -29,6 +30,7 @@ public class AllProperties extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_properties);
 
+        getSupportActionBar().setTitle("All Properties");
         mListView = (ListView) findViewById(R.id.list_properties_view);
         mDatabaseHelper = new DatabaseHelper(this);
 
@@ -67,6 +69,7 @@ public class AllProperties extends AppCompatActivity {
                 newPostcode = getIntent.getStringExtra("postcode");
                 newAddress = getIntent.getStringExtra("address");
                 newTown = getIntent.getStringExtra("town");
+                newRent = getIntent.getStringExtra("rent");
 
                 //todo - pass in the right values using the 'get' value method in the db..
                 //error handling, check if data is returned

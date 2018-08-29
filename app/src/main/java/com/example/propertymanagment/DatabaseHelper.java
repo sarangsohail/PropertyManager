@@ -42,7 +42,9 @@ class DatabaseHelper extends SQLiteOpenHelper{
                 + COL1 + " TEXT NOT NULL,"
                 + COL2 + " TEXT NOT NULL,"
                 + COL3 + " TEXT NOT NULL,"
-                + COL4 + " TEXT NOT NULL);";
+                + COL4 + " TEXT NOT NULL,"
+                + COL5 + " TEXT NOT NULL);";
+
         sqLiteDatabase.execSQL(createTable);
     }
 
@@ -53,13 +55,14 @@ class DatabaseHelper extends SQLiteOpenHelper{
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addData(String number, String postcode, String address, String town){
+    public boolean addData(String number, String postcode, String address, String town, String rent){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL1, number);
         contentValues.put(COL2, postcode);
         contentValues.put(COL3, address);
         contentValues.put(COL4, town);
+        contentValues.put(COL5, rent);
 
         //see if data was inserted properly
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
@@ -169,14 +172,14 @@ class DatabaseHelper extends SQLiteOpenHelper{
         databaseHelper.execSQL(query);
     }
 
-//    public void updateRent(String newRent, int id, String oldRent){
-//        SQLiteDatabase databaseHelper = this.getWritableDatabase();
-//        String query = "UPDATE " + TABLE_NAME + " SET " + COL5 +
-//                " = '" + newRent + "' WHERE " + COL0 + " = '" + id + "'" +
-//                " AND " + COL5 + " = '" + oldRent + "'";
-//
-//        databaseHelper.execSQL(query);
-//    }
+    public void updateRent(String newRent, int id, String oldRent){
+        SQLiteDatabase databaseHelper = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME + " SET " + COL5 +
+                " = '" + newRent + "' WHERE " + COL0 + " = '" + id + "'" +
+                " AND " + COL5 + " = '" + oldRent + "'";
+
+        databaseHelper.execSQL(query);
+    }
 
 
     public void deleteNumber(int id, String number){

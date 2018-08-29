@@ -27,7 +27,7 @@ public class EditPropertyActivity extends AppCompatActivity {
     private String selectedPostcode;
     private String selectedAddress;
     private String selectedTown;
-
+    private String selectedRent;
 
 
     @Override
@@ -41,6 +41,7 @@ public class EditPropertyActivity extends AppCompatActivity {
         postcodeNumberInput = (EditText) findViewById(R.id.postcode_editProperty_et);
         addressNumberInput = (EditText) findViewById(R.id.property_address_edit_et);
         townNumberInput = (EditText) findViewById(R.id.property_town_et);
+        rentNumberInput = (EditText) findViewById(R.id.property_rent_editProp_et);
 
         mDatabaseHelper = new DatabaseHelper(this);
 
@@ -51,6 +52,8 @@ public class EditPropertyActivity extends AppCompatActivity {
         selectedPostcode = receivedIntent.getStringExtra("postcode");
         selectedAddress = receivedIntent.getStringExtra("address");
         selectedTown = receivedIntent.getStringExtra("town");
+        selectedRent = receivedIntent.getStringExtra("rent");
+
 
         houseNumberInput.setText(selectedNo);
         postcodeNumberInput.setText(selectedPostcode);
@@ -64,6 +67,7 @@ public class EditPropertyActivity extends AppCompatActivity {
                 String postcode_et = postcodeNumberInput.getText().toString();
                 String address_et = addressNumberInput.getText().toString();
                 String town_et = townNumberInput.getText().toString();
+                String rent_et = rentNumberInput.getText().toString();
 
                 if (!houseNumber_et.equals("") &&!postcode_et.equals("")
                         &&!address_et.equals("") &&!town_et.equals("")  ){
@@ -72,7 +76,7 @@ public class EditPropertyActivity extends AppCompatActivity {
                     mDatabaseHelper.updatePostcode(postcode_et, selectedID, selectedPostcode);
                     mDatabaseHelper.updateAddress(address_et, selectedID, selectedAddress);
                     mDatabaseHelper.updateTown(town_et, selectedID, selectedTown);
-
+                    mDatabaseHelper.updateRent(rent_et, selectedID, selectedRent);
                     Toast.makeText(EditPropertyActivity.this, "Updated Property Details", Toast.LENGTH_SHORT).show();
                     finish();
 
@@ -92,6 +96,7 @@ public class EditPropertyActivity extends AppCompatActivity {
                 postcodeNumberInput.setText("");
                 addressNumberInput.setText("");
                 townNumberInput.setText("");
+                rentNumberInput.setText("");
                 Toast.makeText(EditPropertyActivity.this, "successfully Removed", Toast.LENGTH_SHORT).show();
                 finish();
             }

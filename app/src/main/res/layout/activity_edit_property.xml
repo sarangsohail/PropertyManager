@@ -116,10 +116,10 @@
 
         </TableRow>
 
-        <TableRow>
+        <!--<TableRow>-->
 
             <!--<TextView-->
-                <!--android:id="@+id/"-->
+                <!--android:id="@+id/bedroom"-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:paddingLeft="10dp"-->
@@ -135,7 +135,7 @@
                 <!--android:textSize="20dp"-->
 
                 <!--/>-->
-        </TableRow>
+        <!--</TableRow>-->
 
         <TableRow>
 
@@ -162,13 +162,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:layout_marginLeft="110dp"
-        android:text="Save" />
+        android:text="Save"
+        android:background="@color/green"/>
 
     <Button
         android:id="@+id/deleteButton_editProp"
         android:layout_width="177dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="110dp"
-        android:text="Delete" />
+        android:text="Delete"
+        android:background="re"/>
 
 </LinearLayout>
