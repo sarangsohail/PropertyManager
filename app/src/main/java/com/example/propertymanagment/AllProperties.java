@@ -59,20 +59,22 @@ public class AllProperties extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String houseNo = adapterView.getItemAtPosition(i).toString();
-             //   String postCode = adapterView.getItemAtPosition(i).toString();
+                String postCode = adapterView.getItemAtPosition(i).toString();
 
                 //get the id associated to that no.
                 Cursor houseItemCursor = mDatabaseHelper.getHouseItemID(houseNo);
-              //  Cursor postCodeItemCursor = mDatabaseHelper.getPostcodeItemID(postCode);
+                Cursor postCodeItemCursor = mDatabaseHelper.getPostcodeItemID(newPostcode);
 
                 Intent getIntent = getIntent();
                 newPostcode = getIntent.getStringExtra("postcode");
                 newAddress = getIntent.getStringExtra("address");
                 newTown = getIntent.getStringExtra("town");
 
+                //todo - pass in the right values using the 'get' value method in the db
                 //error handling, check if data is returned
                 while (houseItemCursor.moveToNext()){
                    int houseItemCursorInt = houseItemCursor.getInt(0);
+//                    String postCodeItemCursorInt = postCodeItemCursor.getString(postCode.to)
 
                     if (houseItemCursorInt > -1){
                         //if a number is successfully returned

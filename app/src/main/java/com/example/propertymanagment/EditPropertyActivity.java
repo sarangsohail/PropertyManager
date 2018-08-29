@@ -61,9 +61,9 @@ public class EditPropertyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String houseNumber_et = houseNumberInput.getText().toString();
-                String postcode_et = houseNumberInput.getText().toString();
-                String address_et = houseNumberInput.getText().toString();
-                String town_et = houseNumberInput.getText().toString();
+                String postcode_et = postcodeNumberInput.getText().toString();
+                String address_et = addressNumberInput.getText().toString();
+                String town_et = townNumberInput.getText().toString();
 
                 if (!houseNumber_et.equals("") &&!postcode_et.equals("")
                         &&!address_et.equals("") &&!town_et.equals("")  ){
@@ -90,4 +90,5 @@ public class EditPropertyActivity extends AppCompatActivity {
         });
 
     }
+    //todo - after
 }
