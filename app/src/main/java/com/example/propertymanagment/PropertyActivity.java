@@ -34,7 +34,10 @@ public class PropertyActivity extends AppCompatActivity {
      EditText town_number_view;
      EditText rent_number_view;
 
-
+    String newHouseNo;
+    String newPostcode;
+    String newAddress;
+    String newTown;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,19 +86,20 @@ public class PropertyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String newHouseNo = house_number_view.getText().toString();
-                String newPostcode = postcode_number_view.getText().toString();
-                String newAddress = address_number_view.getText().toString();
-                String newTown = town_number_view.getText().toString();
+                 newHouseNo = house_number_view.getText().toString();
+                 newPostcode = postcode_number_view.getText().toString();
+                 newAddress = address_number_view.getText().toString();
+                 newTown = town_number_view.getText().toString();
 //                String newRent = Integer.toString(rent_number_view.getText().toString())
 
                 if (newHouseNo.length() != 0 && newPostcode.length() != 0 && newAddress.length() != 0 && newTown.length() != 0){
                     AddData(newHouseNo, newPostcode, newAddress, newTown);
+
                     house_number_view.setText("");
                     postcode_number_view.setText("");
                     address_number_view.setText("");
                     town_number_view.setText("");
-                    Toast.makeText(PropertyActivity.this, "Log.D, Data should be added", Toast.LENGTH_SHORT).show();
+
                 }else{
                     Toast.makeText(PropertyActivity.this, "problem sending storing your data", Toast.LENGTH_SHORT).show();
                 }
@@ -107,6 +111,10 @@ public class PropertyActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                     Intent allPropertiesIntent = new Intent(PropertyActivity.this, AllProperties.class);
+                    allPropertiesIntent.putExtra("postcode", newPostcode);
+                    allPropertiesIntent.putExtra("address", newAddress);
+                    allPropertiesIntent.putExtra("town", newTown);
+
                     startActivity(allPropertiesIntent);
 
 
@@ -121,6 +129,7 @@ public class PropertyActivity extends AppCompatActivity {
 
         if (insertData){
             Toast.makeText(this, "Data Successfully Added", Toast.LENGTH_SHORT).show();
+
         }else{
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
 

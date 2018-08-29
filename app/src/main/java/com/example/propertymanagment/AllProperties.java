@@ -18,7 +18,10 @@ public class AllProperties extends AppCompatActivity {
 
     private static final String TAG = "AllProperties";
     DatabaseHelper mDatabaseHelper;
-
+    String newHouseNo;
+    String newPostcode;
+    String newAddress;
+    String newTown;
     private ListView mListView;
 
     @Override
@@ -43,7 +46,7 @@ public class AllProperties extends AppCompatActivity {
 
             //get the data from the db and add it to the list
             listData.add(allData.getString(1));
-//            listData.add(data.getString(2));
+//               listData.add(allData.getString(2));
 //            listData.add(data.getString(3));
 //            listData.add(data.getString(4));
 
@@ -56,23 +59,31 @@ public class AllProperties extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String houseNo = adapterView.getItemAtPosition(i).toString();
-                String postCode = adapterView.getItemAtPosition(i).toString();
+             //   String postCode = adapterView.getItemAtPosition(i).toString();
 
                 //get the id associated to that no.
                 Cursor houseItemCursor = mDatabaseHelper.getHouseItemID(houseNo);
-                Cursor postCodeItemCursor = mDatabaseHelper.getPostcodeItemID(postCode);
+              //  Cursor postCodeItemCursor = mDatabaseHelper.getPostcodeItemID(postCode);
+
+                Intent getIntent = getIntent();
+                newPostcode = getIntent.getStringExtra("postcode");
+                newAddress = getIntent.getStringExtra("address");
+                newTown = getIntent.getStringExtra("town");
 
                 //error handling, check if data is returned
                 while (houseItemCursor.moveToNext()){
-                   int itemID = houseItemCursor.getInt(0);
+                   int houseItemCursorInt = houseItemCursor.getInt(0);
 
-                    if (itemID > -1){
+                    if (houseItemCursorInt > -1){
                         //if a number is successfully returned
-                        Log.d(TAG, "item id is ... " + itemID);
+                        Log.d(TAG, "item id is ... " + houseItemCursorInt);
                         Intent editDataIntent = new Intent(AllProperties.this, EditPropertyActivity.class);
-                        editDataIntent.putExtra("id", itemID);
+                        editDataIntent.putExtra("id", houseItemCursorInt);
                         editDataIntent.putExtra("number", houseNo);
-                        editDataIntent.putExtra("postcode", postCode);
+                        editDataIntent.putExtra("postcode",newPostcode);
+                        editDataIntent.putExtra("address",newAddress);
+                        editDataIntent.putExtra("town",newTown);
+                      //  editDataIntent.putExtra("postcode", postCode);
                         startActivity(editDataIntent);
 
                     }else{

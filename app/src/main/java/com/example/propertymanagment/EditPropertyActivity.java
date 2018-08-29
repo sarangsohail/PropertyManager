@@ -42,7 +42,6 @@ public class EditPropertyActivity extends AppCompatActivity {
         addressNumberInput = (EditText) findViewById(R.id.property_address_edit_et);
         townNumberInput = (EditText) findViewById(R.id.property_town_et);
 
-
         mDatabaseHelper = new DatabaseHelper(this);
 
         Intent receivedIntent = getIntent();
@@ -66,8 +65,8 @@ public class EditPropertyActivity extends AppCompatActivity {
                 String address_et = houseNumberInput.getText().toString();
                 String town_et = houseNumberInput.getText().toString();
 
-                if (!houseNumber_et.equals("") ||!postcode_et.equals("")
-                        ||!address_et.equals("") ||!town_et.equals("")  ){
+                if (!houseNumber_et.equals("") &&!postcode_et.equals("")
+                        &&!address_et.equals("") &&!town_et.equals("")  ){
 
                     mDatabaseHelper.updateNumber(houseNumber_et, selectedID, selectedNo);
                     mDatabaseHelper.updatePostcode(postcode_et, selectedID, selectedPostcode);
