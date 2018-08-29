@@ -29,4 +29,6 @@ package com.example.propertymanagment;
         public void setmStatus(String mStatus) {
             this.mStatus = mStatus;
         }
+
+
     }

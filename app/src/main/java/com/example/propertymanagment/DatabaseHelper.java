@@ -25,7 +25,7 @@ class DatabaseHelper extends SQLiteOpenHelper{
 //    public static final String COL7 = "name";
 
     public DatabaseHelper(Context context) {
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null,7 );
     }
 
     @Override
@@ -33,9 +33,16 @@ class DatabaseHelper extends SQLiteOpenHelper{
 
 //        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
 //                COL1 + " TEXT)";
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL1 + ",  TEXT" +  COL2 +  ", TEXT" + COL3 + ", TEXT" + COL4  + ", TEXT)" ;
+//        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                COL1 + ",  TEXT" +  COL2 +  ", TEXT" + COL3 + ", TEXT" + COL4  + ", TEXT)" ;
 
+        String createTable = "CREATE TABLE IF NOT EXISTS "
+                + TABLE_NAME + "("
+                + COL0 + " INTEGER PRIMARY KEY," // and auto increment will be handled with                            primary key
+                + COL1 + " TEXT NOT NULL,"
+                + COL2 + " TEXT NOT NULL,"
+                + COL3 + " TEXT NOT NULL,"
+                + COL4 + " TEXT NOT NULL);";
         sqLiteDatabase.execSQL(createTable);
     }
 
@@ -46,16 +53,17 @@ class DatabaseHelper extends SQLiteOpenHelper{
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addData(String name, String postcode, String address, String town){
+    public boolean addData(String number, String postcode, String address, String town){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL1, name);
+        contentValues.put(COL1, number);
         contentValues.put(COL2, postcode);
         contentValues.put(COL3, address);
         contentValues.put(COL4, town);
 
         //see if data was inserted properly
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+        Log.d(TAG, "addDATA : adding " +  number + "to " + TABLE_NAME);
 
         if (result != -1 ){
             return false;
@@ -122,7 +130,6 @@ class DatabaseHelper extends SQLiteOpenHelper{
         return data;
 
     }
-
 
      //update values for the house number
     public void updateNumber(String newNumber, int id, String oldNumber){
