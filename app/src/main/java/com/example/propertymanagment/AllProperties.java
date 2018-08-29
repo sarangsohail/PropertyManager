@@ -59,11 +59,9 @@ public class AllProperties extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String houseNo = adapterView.getItemAtPosition(i).toString();
-                String postCode = adapterView.getItemAtPosition(i).toString();
 
                 //get the id associated to that no.
                 Cursor houseItemCursor = mDatabaseHelper.getHouseItemID(houseNo);
-                Cursor postCodeItemCursor = mDatabaseHelper.getPostcodeItemID(newPostcode);
 
                 Intent getIntent = getIntent();
                 newPostcode = getIntent.getStringExtra("postcode");
@@ -74,9 +72,8 @@ public class AllProperties extends AppCompatActivity {
                 //error handling, check if data is returned
                 while (houseItemCursor.moveToNext()){
                    int houseItemCursorInt = houseItemCursor.getInt(0);
-//                    String postCodeItemCursorInt = postCodeItemCursor.getString(postCode.to)
 
-                    if (houseItemCursorInt > -1){
+                    if (houseItemCursorInt > -1 ){
                         //if a number is successfully returned
                         Log.d(TAG, "item id is ... " + houseItemCursorInt);
                         Intent editDataIntent = new Intent(AllProperties.this, EditPropertyActivity.class);

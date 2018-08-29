@@ -73,6 +73,9 @@ public class EditPropertyActivity extends AppCompatActivity {
                     mDatabaseHelper.updateAddress(address_et, selectedID, selectedAddress);
                     mDatabaseHelper.updateTown(town_et, selectedID, selectedTown);
 
+                    Toast.makeText(EditPropertyActivity.this, "Updated Property Details", Toast.LENGTH_SHORT).show();
+                    finish();
+
                 }else{
                     Toast.makeText(EditPropertyActivity.this, "Oops, Missing Value!", Toast.LENGTH_SHORT).show();
                 }
@@ -84,11 +87,16 @@ public class EditPropertyActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mDatabaseHelper.deleteNumber(selectedID, selectedNo);
+
                 houseNumberInput.setText("");
-                Toast.makeText(EditPropertyActivity.this, "Remove From Database", Toast.LENGTH_SHORT).show();
+                postcodeNumberInput.setText("");
+                addressNumberInput.setText("");
+                townNumberInput.setText("");
+                Toast.makeText(EditPropertyActivity.this, "successfully Removed", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
     }
-    //todo - after
+    //todo - get all the values of the property to remain there, not just the house No.
 }

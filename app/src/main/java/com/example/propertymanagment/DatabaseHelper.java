@@ -25,7 +25,7 @@ class DatabaseHelper extends SQLiteOpenHelper{
 //    public static final String COL7 = "name";
 
     public DatabaseHelper(Context context) {
-        super(context, TABLE_NAME, null,7 );
+        super(context, TABLE_NAME, null,8 );
     }
 
     @Override
@@ -145,7 +145,7 @@ class DatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase databaseHelper = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
                 " = '" + newPostcode + "' WHERE " + COL0 + " = '" + id + "'" +
-                " AND " + COL2 + " = '" + newPostcode + "'";
+                " AND " + COL2 + " = '" + oldPostcode + "'";
 
         databaseHelper.execSQL(query);
     }
