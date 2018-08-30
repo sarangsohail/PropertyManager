@@ -6,6 +6,8 @@
     <string name="tab_tenants">tenants</string>
 
     <string name="chat_online_string">Online</string>
+    <string name="about_user_info_main_popup">This is the email you used to sign in.</string>
+    <string name="main_button_popup_ok">OK</string>
 
     <string-array name="payment_frequency_array_add_prop">
         <item>Weekly</item>

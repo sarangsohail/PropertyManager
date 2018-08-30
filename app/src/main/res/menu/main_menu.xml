@@ -3,10 +3,10 @@
 
     <item android:id="@+id/main_signout_button"
         android:title="Sign Out"
-        android:orderInCategory="1" />
+        android:orderInCategory="2" />
 
     <item android:id="@+id/about_user_button"
         android:title="About Me"
-        android:orderInCategory="2"
+        android:orderInCategory="1"
         />
 </menu>
