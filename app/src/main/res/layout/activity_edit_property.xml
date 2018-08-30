@@ -22,7 +22,8 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
                 android:text="House No."
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                />
 
             <EditText
                 android:id="@+id/houseNumber_input"
@@ -160,17 +161,18 @@
         android:id="@+id/saveButton_editProp"
         android:layout_width="177dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="110dp"
-        android:text="Save"
-        android:background="@color/green"/>
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="130dp"
+        android:background="@color/green"
+        android:text="Save" />
 
     <Button
         android:id="@+id/deleteButton_editProp"
         android:layout_width="177dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="110dp"
-        android:text="Delete"
-        android:background="re"/>
+        android:layout_marginLeft="100dp"
+        android:background="@color/colorRed"
+        android:text="Delete" />
 
 </LinearLayout>

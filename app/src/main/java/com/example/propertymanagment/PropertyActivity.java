@@ -52,7 +52,7 @@ public class PropertyActivity extends AppCompatActivity {
         postcode_number_view = (EditText) findViewById(R.id.postcode_add_prop);
         address_number_view = (EditText) findViewById(R.id.prop_street_et);
         town_number_view = (EditText) findViewById(R.id.city_town_et);
-        rent_number_view = (EditText) findViewById(R.id.property_rent_editProp_et);
+        rent_number_view = (EditText) findViewById(R.id.rent_add_prop);
 
         saveButton = (Button) findViewById(R.id.prop_button_save);
         all_Prop_button = (Button) findViewById(R.id.view_all_properties_button);

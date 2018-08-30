@@ -59,6 +59,8 @@ public class EditPropertyActivity extends AppCompatActivity {
         postcodeNumberInput.setText(selectedPostcode);
         addressNumberInput.setText(selectedAddress);
         townNumberInput.setText(selectedTown);
+        rentNumberInput.setText(selectedRent);
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +72,7 @@ public class EditPropertyActivity extends AppCompatActivity {
                 String rent_et = rentNumberInput.getText().toString();
 
                 if (!houseNumber_et.equals("") &&!postcode_et.equals("")
-                        &&!address_et.equals("") &&!town_et.equals("")  ){
+                        &&!address_et.equals("") &&!town_et.equals("") && !rent_et.equals("") ){
 
                     mDatabaseHelper.updateNumber(houseNumber_et, selectedID, selectedNo);
                     mDatabaseHelper.updatePostcode(postcode_et, selectedID, selectedPostcode);
@@ -97,7 +99,7 @@ public class EditPropertyActivity extends AppCompatActivity {
                 addressNumberInput.setText("");
                 townNumberInput.setText("");
                 rentNumberInput.setText("");
-                Toast.makeText(EditPropertyActivity.this, "successfully Removed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPropertyActivity.this, "Successfully Removed Property", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

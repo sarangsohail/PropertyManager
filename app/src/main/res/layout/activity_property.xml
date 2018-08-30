@@ -242,6 +242,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="85dp"
         android:layout_weight="1"
+        android:background="@color/green"
         android:text="Save" />
 
     <Button
@@ -252,6 +253,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
         android:layout_weight="1"
+        android:background="@android:color/holo_purple"
         android:text="View All Properties" />
 
 
