@@ -1,5 +1,6 @@
 package com.example.propertymanagment;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -136,6 +137,9 @@ public class MainActivity extends AppCompatActivity  {
             FirebaseAuth.getInstance().signOut();
 
             sendToStartActivity();
+        }else if (item.getItemId() == R.id.about_user_button){
+
+            
         }
 
         return super.onOptionsItemSelected(item);
