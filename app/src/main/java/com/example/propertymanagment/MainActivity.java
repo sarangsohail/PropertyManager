@@ -5,6 +5,9 @@ import android.app.Application;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -39,22 +42,22 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //get user display name
         Intent userNameIntent = getIntent();
         String user_name = userNameIntent.getStringExtra("user_name");
 
-//        if (user_name == null){
-//            sendToStartActivity();
-//        }else{
-//            getSupportActionBar().setTitle("Welcome");
-//        }
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            // User is signed in
             getSupportActionBar().setTitle("Welcome");
-        }else{
+
+        } else {
+            // No user is signed in
             sendToStartActivity();
+
         }
+
+
 
 
         //onclick listeners for the main options in main activity
@@ -146,15 +149,29 @@ public class MainActivity extends AppCompatActivity  {
             sendToStartActivity();
         }else if (item.getItemId() == R.id.about_user_button){
 
-            String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+            showAboutPopDialog();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    public void showAboutPopDialog(){
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
 
             aboutUserMenuDialoag = new Dialog(this);
             aboutUserMenuDialoag.setContentView(R.layout.about_popup_main);
 
-            about_user_main_textview_menu = (TextView) findViewById(R.id.about_user_main_textview);
-            //about_user_main_textview_menu.setText("Email: " );
+            about_user_main_textview_menu = (TextView) aboutUserMenuDialoag.findViewById(R.id.about_user_main_textview);
+            about_user_main_textview_menu.setText(name);
 
-            btnAaoutUserMenuDialoag = (Button) findViewById(R.id.btn_ok_about_menu);
+            btnAaoutUserMenuDialoag = (Button) aboutUserMenuDialoag.findViewById(R.id.btn_ok_about_menu);
 
             btnAaoutUserMenuDialoag.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -162,9 +179,37 @@ public class MainActivity extends AppCompatActivity  {
                     aboutUserMenuDialoag.dismiss();
                 }
             });
+
+            aboutUserMenuDialoag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            aboutUserMenuDialoag.show();
+        }else {
+            aboutUserMenuDialoag = new Dialog(this);
+            aboutUserMenuDialoag.setContentView(R.layout.about_popup_main);
+
+            Toast.makeText(this, "Problem accessing your name and email", Toast.LENGTH_SHORT).show();
+            about_user_main_textview_menu = (TextView) aboutUserMenuDialoag.findViewById(R.id.about_user_main_textview);
+            about_user_main_textview_menu.setText("User");
+
+            btnAaoutUserMenuDialoag = (Button) aboutUserMenuDialoag.findViewById(R.id.btn_ok_about_menu);
+
+            btnAaoutUserMenuDialoag.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    aboutUserMenuDialoag.dismiss();
+                }
+            });
+
+            aboutUserMenuDialoag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            aboutUserMenuDialoag.show();
         }
 
-        return super.onOptionsItemSelected(item);
+
+    }
+
+
+
+    public void setDisplayName() {
+
 
     }
 }
