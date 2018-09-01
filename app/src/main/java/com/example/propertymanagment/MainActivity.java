@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity  {
 
     private TextView about_user_main_textview_menu;
 
+     String user_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity  {
             // User is signed in
             getSupportActionBar().setTitle("Welcome");
 
+            user_name = getIntent().getStringExtra("user_name");
         } else {
             // No user is signed in
             sendToStartActivity();
@@ -151,6 +155,7 @@ public class MainActivity extends AppCompatActivity  {
 
             showAboutPopDialog();
 
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -159,36 +164,15 @@ public class MainActivity extends AppCompatActivity  {
 
     public void showAboutPopDialog(){
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
+             String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             aboutUserMenuDialoag = new Dialog(this);
             aboutUserMenuDialoag.setContentView(R.layout.about_popup_main);
 
             about_user_main_textview_menu = (TextView) aboutUserMenuDialoag.findViewById(R.id.about_user_main_textview);
-            about_user_main_textview_menu.setText(name);
 
-            btnAaoutUserMenuDialoag = (Button) aboutUserMenuDialoag.findViewById(R.id.btn_ok_about_menu);
+            about_user_main_textview_menu.setText(userEmail);
 
-            btnAaoutUserMenuDialoag.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    aboutUserMenuDialoag.dismiss();
-                }
-            });
-
-            aboutUserMenuDialoag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            aboutUserMenuDialoag.show();
-        }else {
-            aboutUserMenuDialoag = new Dialog(this);
-            aboutUserMenuDialoag.setContentView(R.layout.about_popup_main);
-
-            Toast.makeText(this, "Problem accessing your name and email", Toast.LENGTH_SHORT).show();
-            about_user_main_textview_menu = (TextView) aboutUserMenuDialoag.findViewById(R.id.about_user_main_textview);
-            about_user_main_textview_menu.setText("User");
 
             btnAaoutUserMenuDialoag = (Button) aboutUserMenuDialoag.findViewById(R.id.btn_ok_about_menu);
 
@@ -202,9 +186,6 @@ public class MainActivity extends AppCompatActivity  {
             aboutUserMenuDialoag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             aboutUserMenuDialoag.show();
         }
-
-
-    }
 
 
 

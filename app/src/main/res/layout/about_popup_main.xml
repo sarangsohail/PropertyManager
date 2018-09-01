@@ -28,14 +28,14 @@
                 android:layout_marginBottom="25dp">
 
                 <TextView
-                    android:id="@+id/about_user_main_textview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textAlignment="center"
-                    android:textStyle="bold"
+                    android:text="@string/about_user_info_main_popup"
                     android:textSize="25dp"
+                    android:textColor="@color/colorWhite"
                     />
 
             <ImageView
@@ -46,17 +46,20 @@
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/about_user_icon"
                 />
+
             <TextView
+                android:id="@+id/about_user_main_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="5dp"
+                android:paddingTop="5dp"
                 android:textAlignment="center"
-                android:text="@string/about_user_info_main_popup"
-                android:textSize="18sp"
                 android:textColor="@color/colorWhite"
-                />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_ok_about_menu"
@@ -65,7 +68,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/main_button_popup_ok"
                 android:textColor="@color/colorWhite"
-                android:background="@drawable/button_about_user_main_menu"
+                android:background="@color/green"
                 android:layout_gravity="center"
                 />
         </LinearLayout>
