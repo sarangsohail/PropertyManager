@@ -117,7 +117,7 @@ public class PropertyActivity extends AppCompatActivity {
                     allPropertiesIntent.putExtra("postcode", newPostcode);
                     allPropertiesIntent.putExtra("address", newAddress);
                     allPropertiesIntent.putExtra("town", newTown);
-                    allPropertiesIntent.putExtra("town", newRent);
+                    allPropertiesIntent.putExtra("rent", newRent);
                     startActivity(allPropertiesIntent);
 
 

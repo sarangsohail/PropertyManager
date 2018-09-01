@@ -61,6 +61,7 @@ public class EditPropertyActivity extends AppCompatActivity {
         townNumberInput.setText(selectedTown);
         rentNumberInput.setText(selectedRent);
 
+        //todo - get the rent to display in the edit propertu activity
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +101,8 @@ public class EditPropertyActivity extends AppCompatActivity {
                 townNumberInput.setText("");
                 rentNumberInput.setText("");
                 Toast.makeText(EditPropertyActivity.this, "Successfully Removed Property", Toast.LENGTH_SHORT).show();
-                finish();
+                Intent sendBackToPropertyActivity = new Intent(getApplicationContext(), PropertyActivity.class);
+                startActivity(sendBackToPropertyActivity);
             }
         });
 
