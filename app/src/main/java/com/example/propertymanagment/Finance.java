@@ -59,6 +59,7 @@ public class Finance extends AppCompatActivity {
                     double x = Double.parseDouble(mX.getText().toString());
                     double y = Double.parseDouble(mY.getText().toString());
                     xyValueArray.add(new XYValues(x,y));
+                    //calls itself to refresh the points
                     init();
                 }else {
                     Toast.makeText(Finance.this, "Fill in all the fields!", Toast.LENGTH_SHORT).show();
