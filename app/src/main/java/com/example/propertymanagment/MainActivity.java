@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity  {
         }
 
 
-
-
         //onclick listeners for the main options in main activity
         mProperty = (CardView) findViewById(R.id.add_property_main);
         mFinance = (CardView) findViewById(R.id.finance_option_main);
@@ -85,6 +83,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
+                Intent financeIntent = new Intent(MainActivity.this, Finance.class);
+                startActivity(financeIntent);
 
             }
         });

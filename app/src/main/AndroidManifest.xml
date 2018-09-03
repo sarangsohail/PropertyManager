@@ -56,21 +56,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MessagingMainActivity">
-
-        </activity>
+        <activity android:name=".MessagingMainActivity"></activity>
         <activity
             android:name=".ChatActivity"
             android:parentActivityName=".MessagingMainActivity" />
-        <activity android:name=".PropertyActivity">
-
-        </activity>
-        <activity android:name=".AllProperties" android:parentActivityName=".PropertyActivity">
-
-        </activity>
-        <activity android:name=".EditPropertyActivity" android:parentActivityName=".AllProperties">
-
-        </activity>
+        <activity android:name=".PropertyActivity"></activity>
+        <activity
+            android:name=".AllProperties"
+            android:parentActivityName=".PropertyActivity"></activity>
+        <activity
+            android:name=".EditPropertyActivity"
+            android:parentActivityName=".AllProperties"></activity>
+        <activity android:name=".Finance"></activity>
     </application>
 
 </manifest>
