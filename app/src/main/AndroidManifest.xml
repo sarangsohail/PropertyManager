@@ -68,10 +68,8 @@
             android:name=".EditPropertyActivity"
             android:parentActivityName=".AllProperties" />
         <activity android:name=".Finance" />
-        <activity
-            android:name=".FinanceMainActivity"
-            android:label="@string/title_activity_finance_main" />
-        <activity android:name=".FinancePieChartActivity"></activity>
+        <activity android:name=".FinancePieChartActivity" />
+        <activity android:name=".FinanceActivityMain"></activity>
     </application>
 
 </manifest>

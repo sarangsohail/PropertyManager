@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                Intent financeIntent = new Intent(MainActivity.this, FinancePieChartActivity.class);
+                Intent financeIntent = new Intent(MainActivity.this, FinanceActivityMain.class);
                 startActivity(financeIntent);
 
             }

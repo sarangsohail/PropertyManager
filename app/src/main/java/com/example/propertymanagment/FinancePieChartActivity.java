@@ -1,9 +1,17 @@
 package com.example.propertymanagment;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -14,6 +22,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FinancePieChartActivity extends AppCompatActivity {
@@ -21,17 +30,30 @@ public class FinancePieChartActivity extends AppCompatActivity {
     public static final String TAG = "Finance Pie Chart";
 
 
-    private float[] yData = {25.3f, 10.6f, 66.76f, 44.32f, 46.01f, 16.89f, 23.9f};
-    private String[] xData = {"Mitch", "Jessica" , "Mohammad" , "Kelsey", "Sam", "Robert", "Ashley"};
+    //private float[] yData = {25.3f, 10.6f, 66.76f, 44.32f, 46.01f, 16.89f, 23.9f};
+    private float[] yData = {25, 25, 40,10};
+    //private String[] xData = {"Mitch", "Jessica" , "Mohammad" , "Kelsey", "Sam", "Robert", "Ashley"};
     PieChart pieChart;
 
     String pieDesc = "";
+    private Float insurance, bills, mortgage, legal, repairs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance_pie_chart);
         Log.d(TAG, "onCreate: starting to create chart" );
 
+
+//        //pie chart apperance config
+//        pieChartConfig();
+//
+//
+//        addDataSet();
+
+    }
+
+
+    private void pieChartConfig() {
         pieChart = (PieChart) findViewById(R.id.financePieChart);
 
         pieChart.setRotationEnabled(true);
@@ -39,22 +61,6 @@ public class FinancePieChartActivity extends AppCompatActivity {
         pieChart.setTransparentCircleAlpha(0);
         pieChart.setCenterText("Property Costs");
         pieChart.setCenterTextSize(13);
-        
-        addDataSet();
-        pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-
-                Log.d(TAG, "onValueSelected: Value select from chart.");
-                Log.d(TAG, "onValueSelected: " + e.toString());
-                Log.d(TAG, "onValueSelected: " + h.toString());
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
     }
 
     private void addDataSet() {
@@ -67,9 +73,9 @@ public class FinancePieChartActivity extends AppCompatActivity {
             yEntries.add(new PieEntry(yData[i] , i));
         }
 
-        for (int i=0; i<xData.length; i++){
-            xEntrys.add(xData[i]);
-        }
+//        for (int i=0; i<xData.length; i++){
+//            xEntrys.add(xData[i]);
+//        }
 
         //creating the dataset
         PieDataSet pieDataSet = new PieDataSet(yEntries, "Property costs'");
