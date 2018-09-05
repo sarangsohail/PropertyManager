@@ -19,6 +19,7 @@
     <color name="darkblue">#23283a</color>
     <color name="weirdBlueDashboard">#00a0ff</color>
     <color name="pink">#fe104d</color>
+    <color name="black">#f1000000</color>
 
     <color name="black_overlay">#66000000</color>
 

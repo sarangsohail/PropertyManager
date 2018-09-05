@@ -14,33 +14,31 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-public class InsuranceDialog extends AppCompatDialogFragment {
+public class BillsDialog extends AppCompatDialogFragment {
 
+    private TextView billDisplay;
+    private Button billDialogBtn;
+    private EditText bills_input_dialog;
 
+    private TextView billsEditText;
 
-    private EditText insurance_input_dialog;
-
-    private InsuranceDialogListener listener;
-    private EditText insuranceTextView;
-
-    @Override
+    private  billDialogListener listener;
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        final View view = inflater.inflate(R.layout.dialog_insurance, null);
+        final View view = inflater.inflate(R.layout.dialog_bills, null);
 
         builder.setView(view)
-                .setTitle("Set Insurance")
+                .setTitle("Set your bills")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //on ok
-                        insurance_input_dialog = (EditText) view.findViewById(R.id.insurance_input_dialog);
-                        String insurance = insurance_input_dialog.getText().toString();
-                        listener.applyInsurance(insurance);
+                        bills_input_dialog = (EditText) view.findViewById(R.id.bills_input_dialog);
+                        String getBill = bills_input_dialog.getText().toString();
+                        listener.setBill(getBill);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -50,10 +48,9 @@ public class InsuranceDialog extends AppCompatDialogFragment {
                     }
                 });
 
-              insuranceTextView = view.findViewById(R.id.insurance_input_dialog);
+        billsEditText = (TextView) view.findViewById(R.id.billsTitleTextViewFinance2);
+        return builder.create();
 
-
-            return builder.create();
     }
 
     @Override
@@ -61,16 +58,15 @@ public class InsuranceDialog extends AppCompatDialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (InsuranceDialogListener) context;
+            listener = (billDialogListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + "must add InsuranceDialogListener");
-
+            throw new ClassCastException(context.toString() + "must add billdialoglistener");
         }
 
+
     }
 
-    public interface InsuranceDialogListener{
-        void applyInsurance(String insurance);
+    public interface billDialogListener{
+        void setBill(String bills);
     }
-
 }

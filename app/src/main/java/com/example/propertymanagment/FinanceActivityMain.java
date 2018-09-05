@@ -6,26 +6,37 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class FinanceActivityMain extends AppCompatActivity implements InsuranceDialog.InsuranceDialogListener{
+public class FinanceActivityMain extends AppCompatActivity implements InsuranceDialog.InsuranceDialogListener, BillsDialog.billDialogListener{
 
-    private TextView insuranceDisplayTV;
-    private Button changeFinancesButton;
+    private TextView insuranceTextView;
+    private Button changeInsuranceBtn;
+    private TextView billTextView;
+    private Button changeBillsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance_main);
 
-        insuranceDisplayTV = (TextView) findViewById(R.id.insurance_display_financeMain);
-        changeFinancesButton = (Button) findViewById(R.id.call_dialogButton);
+        insuranceTextView = (TextView) findViewById(R.id.insurance_display_financeMain);
+        changeInsuranceBtn = (Button) findViewById(R.id.insurance_dialog_button);
+        billTextView = (TextView) findViewById(R.id.bills_display_financeMain);
+        changeBillsBtn = (Button) findViewById(R.id.bills_dialog_Button);
 
-        changeFinancesButton.setOnClickListener(new View.OnClickListener() {
+        changeInsuranceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openInsuranceDialog();
 
             }
         });
+        changeBillsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openBillsDialog();
+            }
+        });
+
     }
 
     private void openInsuranceDialog(){
@@ -33,9 +44,18 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
         insuranceDialog.show(getSupportFragmentManager(), "insurance dialog");
     }
 
+
+    private void openBillsDialog(){
+        BillsDialog billsDialog = new BillsDialog();
+        billsDialog.show(getSupportFragmentManager(), "bills dialog");
+    }
     @Override
     public void applyInsurance(String insurance) {
-        insuranceDisplayTV.setText(insurance);
+        insuranceTextView.setText("£" + insurance);
+    }
 
+    @Override
+    public void setBill(String bills) {
+        billTextView.setText("£" + bills);
     }
 }
