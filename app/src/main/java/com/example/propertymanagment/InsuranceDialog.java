@@ -21,7 +21,7 @@ public class InsuranceDialog extends AppCompatDialogFragment {
     private EditText insurance_input_dialog;
 
     private InsuranceDialogListener listener;
-    private EditText insuranceTextView;
+    private EditText insuranceEditText;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class InsuranceDialog extends AppCompatDialogFragment {
                         insurance_input_dialog = (EditText) view.findViewById(R.id.insurance_input_dialog);
                         String insurance = insurance_input_dialog.getText().toString();
                         listener.applyInsurance(insurance);
+                        listener.getInsurance(insurance);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -50,7 +51,7 @@ public class InsuranceDialog extends AppCompatDialogFragment {
                     }
                 });
 
-              insuranceTextView = view.findViewById(R.id.insurance_input_dialog);
+        insuranceEditText = view.findViewById(R.id.insurance_input_dialog);
 
 
             return builder.create();
@@ -71,6 +72,7 @@ public class InsuranceDialog extends AppCompatDialogFragment {
 
     public interface InsuranceDialogListener{
         void applyInsurance(String insurance);
+        void getInsurance(String newInsurance);
     }
 
 }

@@ -69,7 +69,7 @@
             android:parentActivityName=".AllProperties" />
         <activity android:name=".Finance" />
         <activity android:name=".FinancePieChartActivity" />
-        <activity android:name=".FinanceActivityMain"></activity>
+        <activity android:name=".FinanceActivityMain" android:parentActivityName=".Finance"></activity>
     </application>
 
 </manifest>

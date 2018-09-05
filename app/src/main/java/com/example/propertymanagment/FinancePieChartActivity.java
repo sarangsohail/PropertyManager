@@ -2,6 +2,7 @@ package com.example.propertymanagment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,7 @@ public class FinancePieChartActivity extends AppCompatActivity {
 
 
     //private float[] yData = {25.3f, 10.6f, 66.76f, 44.32f, 46.01f, 16.89f, 23.9f};
-    private float[] yData = {25, 25, 40,10};
+    private float[] yData = {};
     //private String[] xData = {"Mitch", "Jessica" , "Mohammad" , "Kelsey", "Sam", "Robert", "Ashley"};
     PieChart pieChart;
 
@@ -43,12 +44,18 @@ public class FinancePieChartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finance_pie_chart);
         Log.d(TAG, "onCreate: starting to create chart" );
 
+        Intent piechartIntent = getIntent();
+        Float insurance = Float.valueOf(piechartIntent.getStringExtra("insurance"));
+
+        for (int i= 0; i< yData.length; i++){
+           yData[i] = insurance;
+       }
 
 //        //pie chart apperance config
-//        pieChartConfig();
+        pieChartConfig();
 //
 //
-//        addDataSet();
+        addDataSet();
 
     }
 
