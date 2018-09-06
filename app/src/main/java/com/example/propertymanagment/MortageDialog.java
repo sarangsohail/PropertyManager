@@ -38,6 +38,7 @@ public class MortageDialog extends AppCompatDialogFragment {
                         mortgage = (EditText) view.findViewById(R.id.mortage_input_dialog);
                         String mortage = mortgage.getText().toString();
                         listener.applyMortgage(mortage);
+                        listener.getMortgage(mortage);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -64,5 +65,6 @@ public class MortageDialog extends AppCompatDialogFragment {
 
     public interface MortageDialogListener{
         void applyMortgage(String mortage);
+        void getMortgage(String newMortgage);
     }
 }

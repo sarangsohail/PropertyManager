@@ -39,6 +39,7 @@ public class BillsDialog extends AppCompatDialogFragment {
                         bills_input_dialog = (EditText) view.findViewById(R.id.bills_input_dialog);
                         String getBill = bills_input_dialog.getText().toString();
                         listener.setBill(getBill);
+                        listener.getBill(getBill);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -68,5 +69,6 @@ public class BillsDialog extends AppCompatDialogFragment {
 
     public interface billDialogListener{
         void setBill(String bills);
+        void getBill(String newBill);
     }
 }

@@ -3,14 +3,17 @@ package com.example.propertymanagment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class FinanceActivityMain extends AppCompatActivity implements InsuranceDialog.InsuranceDialogListener, BillsDialog.billDialogListener, MortageDialog.MortageDialogListener{
 
+    private static final String TAG = "FinanceMainActivity";
     private TextView insuranceTextView;
     private Button changeInsuranceBtn;
     private TextView billTextView;
@@ -18,9 +21,9 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
     private TextView mortgageTextView;
     private Button changeMortgageBtn;
     private Button different_format_button;
-    private String insurancePieChart ="";
-    private String billsPieChart ="";
-    private String mortgagePieChart ="";
+    private float insurancePieChart;
+    private float billsPieChart;
+    private float mortgagePieChart;
     private TextView insurance_number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +65,17 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
         different_format_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent pieChartIntent =new Intent(FinanceActivityMain.this, FinancePieChartActivity.class);
-               pieChartIntent.putExtra("insurance", insurancePieChart);
-                startActivity(pieChartIntent);
+
+                if (!mortgageTextView.equals("N/A") && !insuranceTextView.equals("N/A") && !billTextView.equals("N/A")) {
+                    Intent pieChartIntent =new Intent(FinanceActivityMain.this, FinancePieChartActivity.class);
+                    pieChartIntent.putExtra("insurance", insurancePieChart);
+                    pieChartIntent.putExtra("mortgage", mortgagePieChart);
+                    pieChartIntent.putExtra("bills", billsPieChart);
+                    startActivity(pieChartIntent);
+//                    Log.d(TAG,"when different format button is pressed " + insurancePieChart.toString());
+                } else {
+                    Toast.makeText(FinanceActivityMain.this, "Please fill in the fields above", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -93,8 +104,10 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
 
     @Override
     public void getInsurance(String newInsurance) {
-        insurancePieChart = newInsurance;
+        float changeInsurance = Float.parseFloat(newInsurance);
+        insurancePieChart = changeInsurance;
     }
+
 
     @Override
     public void setBill(String bills) {
@@ -102,7 +115,19 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
     }
 
     @Override
+    public void getBill(String newBill) {
+        float newChangesBill = Float.parseFloat(newBill);
+        billsPieChart = newChangesBill;
+    }
+
+    @Override
     public void applyMortgage(String mortgage) {
-        mortgageTextView.setText("£)" + mortgage);
+        mortgageTextView.setText("£" + mortgage);
+    }
+
+    @Override
+    public void getMortgage(String newMortgage) {
+        float changeNewMortgage = Float.parseFloat(newMortgage);
+        mortgagePieChart = changeNewMortgage;
     }
 }

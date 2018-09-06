@@ -28,35 +28,49 @@ import java.util.ArrayList;
 
 public class FinancePieChartActivity extends AppCompatActivity {
 
-    public static final String TAG = "Finance Pie Chart";
-
+    public static final String TAG = "FinancePieChart";
 
     //private float[] yData = {25.3f, 10.6f, 66.76f, 44.32f, 46.01f, 16.89f, 23.9f};
-    private float[] yData = {};
+//    private float[] yData = {50,20,15};
+    ArrayList<Float> yData = new ArrayList<Float>();
     //private String[] xData = {"Mitch", "Jessica" , "Mohammad" , "Kelsey", "Sam", "Robert", "Ashley"};
     PieChart pieChart;
+    private float insuranceFloat;
+    private float mortgageFloat;
+    private float billsFloat;
+
 
     String pieDesc = "";
     private Float insurance, bills, mortgage, legal, repairs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance_pie_chart);
-        Log.d(TAG, "onCreate: starting to create chart" );
 
         Intent piechartIntent = getIntent();
-        Float insurance = Float.valueOf(piechartIntent.getStringExtra("insurance"));
 
-        for (int i= 0; i< yData.length; i++){
-           yData[i] = insurance;
-       }
+         insurance = piechartIntent.getFloatExtra("insurance", 0);
+         mortgage =  piechartIntent.getFloatExtra("mortgage",0);
+         bills = piechartIntent.getFloatExtra("bills", 0);
+        Log.d(TAG, "string mortgage iis ...  " + mortgage);
 
+        yData.add(0, insurance);
+        yData.add(1, mortgage);
+        yData.add(2, bills);
+//        for(int i=0; i<yData.length; i++){
+//            yData[i] = insurance;
+//            yData[1] = mortgage;
+//
+//        }
+        insuranceFloat = insurance;
+        mortgageFloat= mortgage;
+        billsFloat = bills;
+        Log.d(TAG, "in the oncreate before the piechart config" + mortgageFloat+ "insurance float" + insuranceFloat);
 //        //pie chart apperance config
         pieChartConfig();
-//
-//
-        addDataSet();
 
+        addDataSet();
     }
 
 
@@ -71,14 +85,16 @@ public class FinancePieChartActivity extends AppCompatActivity {
     }
 
     private void addDataSet() {
-        Log.d(TAG, "in dataset method: ");
+        Log.d(TAG, "in data set method: ");
 
         ArrayList<PieEntry> yEntries = new ArrayList<>();
-        ArrayList<String> xEntrys = new ArrayList<>();
+    //    ArrayList<String> xEntrys = new ArrayList<>();
 
-        for(int i = 0; i < yData.length; i++){
-            yEntries.add(new PieEntry(yData[i] , i));
-        }
+//        for(int i = 0; i < yData.size() -1; i++){
+            yEntries.add(new PieEntry( yData.set(0,insuranceFloat )));
+            yEntries.add(new PieEntry(yData.set(1, mortgageFloat )));
+            yEntries.add(new PieEntry(yData.set(2, billsFloat)));
+//        }
 
 //        for (int i=0; i<xData.length; i++){
 //            xEntrys.add(xData[i]);
@@ -91,13 +107,9 @@ public class FinancePieChartActivity extends AppCompatActivity {
 
         //add colors to dataset
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GRAY);
         colors.add(Color.BLUE);
         colors.add(Color.RED);
         colors.add(Color.GREEN);
-        colors.add(Color.CYAN);
-        colors.add(Color.YELLOW);
-        colors.add(Color.MAGENTA);
 
         pieDataSet.setColors(colors);
 
@@ -110,7 +122,6 @@ public class FinancePieChartActivity extends AppCompatActivity {
         PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.invalidate();
-
 
     }
 
