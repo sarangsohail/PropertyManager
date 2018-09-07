@@ -1,6 +1,7 @@
 package com.example.propertymanagment;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,8 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
     private float insurancePieChart;
     private float billsPieChart;
     private float mortgagePieChart;
-    private TextView insurance_number;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +41,14 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
         changeMortgageBtn = (Button) findViewById(R.id.mortgage_dialog_Button);
         different_format_button = (Button) findViewById(R.id.piechartButton_financeMain);
 
+
+
+        //button listeners
         changeInsuranceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openInsuranceDialog();
-
-
-            }
+                }
         });
         changeBillsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +57,6 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
 
             }
         });
-
         changeMortgageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,15 +68,17 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
             @Override
             public void onClick(View view) {
 
-                if (!mortgageTextView.equals("N/A") && !insuranceTextView.equals("N/A") && !billTextView.equals("N/A")) {
+                if (!mortgageTextView.getText().toString().equals("")
+                        && !insuranceTextView.toString().equals("")
+                        && !billTextView.getText().toString().equals("")) {
+
                     Intent pieChartIntent =new Intent(FinanceActivityMain.this, FinancePieChartActivity.class);
                     pieChartIntent.putExtra("insurance", insurancePieChart);
                     pieChartIntent.putExtra("mortgage", mortgagePieChart);
                     pieChartIntent.putExtra("bills", billsPieChart);
                     startActivity(pieChartIntent);
-//                    Log.d(TAG,"when different format button is pressed " + insurancePieChart.toString());
                 } else {
-                    Toast.makeText(FinanceActivityMain.this, "Please fill in the fields above", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FinanceActivityMain.this, "Please fill in all the fields above", Toast.LENGTH_SHORT).show();
                 }
             }
         });

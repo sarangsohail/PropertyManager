@@ -15,7 +15,8 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
 
-public class Finance extends AppCompatActivity {
+//scatter graph class
+public class ScatterGraph extends AppCompatActivity {
 
     public static final String TAG = "FinanceActivity";
 
@@ -37,6 +38,7 @@ public class Finance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance);
 
+        getSupportActionBar().setTitle("Customer Scatter Graph");
         addPointsButtonFinance = (Button) findViewById(R.id.btnAddPt);
         mX = (EditText) findViewById(R.id.numX);
         mY = (EditText) findViewById(R.id.numY);
@@ -62,7 +64,7 @@ public class Finance extends AppCompatActivity {
                     //calls itself to refresh the points
                     init();
                 }else {
-                    Toast.makeText(Finance.this, "Fill in all the fields!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScatterGraph.this, "Fill in all the fields!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -67,9 +67,9 @@
         <activity
             android:name=".EditPropertyActivity"
             android:parentActivityName=".AllProperties" />
-        <activity android:name=".Finance" />
-        <activity android:name=".FinancePieChartActivity" />
-        <activity android:name=".FinanceActivityMain" android:parentActivityName=".Finance"></activity>
+        <activity android:name=".ScatterGraph" android:parentActivityName=".FinancePieChartActivity"/>
+        <activity android:name=".FinancePieChartActivity" android:parentActivityName=".FinanceActivityMain"/>
+        <activity android:name=".FinanceActivityMain" android:parentActivityName=".ScatterGraph"></activity>
     </application>
 
 </manifest>

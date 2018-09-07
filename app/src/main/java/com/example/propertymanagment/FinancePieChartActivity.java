@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,8 +40,9 @@ public class FinancePieChartActivity extends AppCompatActivity {
     private float mortgageFloat;
     private float billsFloat;
 
+    private Button scatterGraphBtn;
 
-    String pieDesc = "";
+    String pieDesc = "Graphical Format Of Your Finances";
     private Float insurance, bills, mortgage, legal, repairs;
 
     @Override
@@ -48,24 +50,31 @@ public class FinancePieChartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance_pie_chart);
 
+        getSupportActionBar().setTitle("Finances In A Pie Chart");
         Intent piechartIntent = getIntent();
 
          insurance = piechartIntent.getFloatExtra("insurance", 0);
          mortgage =  piechartIntent.getFloatExtra("mortgage",0);
          bills = piechartIntent.getFloatExtra("bills", 0);
-        Log.d(TAG, "string mortgage iis ...  " + mortgage);
+         scatterGraphBtn = (Button) findViewById(R.id.scatterClassBtn);
 
+         scatterGraphBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Intent loadScatterGraphClass = new Intent(FinancePieChartActivity.this, ScatterGraph.class);
+                 startActivity(loadScatterGraphClass);
+             }
+         });
+
+        //add all the three finance values in the arrayList
         yData.add(0, insurance);
         yData.add(1, mortgage);
         yData.add(2, bills);
-//        for(int i=0; i<yData.length; i++){
-//            yData[i] = insurance;
-//            yData[1] = mortgage;
-//
-//        }
+
         insuranceFloat = insurance;
         mortgageFloat= mortgage;
         billsFloat = bills;
+
         Log.d(TAG, "in the oncreate before the piechart config" + mortgageFloat+ "insurance float" + insuranceFloat);
 //        //pie chart apperance config
         pieChartConfig();
