@@ -38,7 +38,7 @@ public class ScatterGraph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance);
 
-        getSupportActionBar().setTitle("Customer Scatter Graph");
+        getSupportActionBar().setTitle("Custom Scatter Graph");
         addPointsButtonFinance = (Button) findViewById(R.id.btnAddPt);
         mX = (EditText) findViewById(R.id.numX);
         mY = (EditText) findViewById(R.id.numY);
@@ -63,6 +63,8 @@ public class ScatterGraph extends AppCompatActivity {
                     xyValueArray.add(new XYValues(x,y));
                     //calls itself to refresh the points
                     init();
+                    mY.setText("");
+                    mX.setText("");
                 }else {
                     Toast.makeText(ScatterGraph.this, "Fill in all the fields!", Toast.LENGTH_SHORT).show();
                 }
