@@ -52,7 +52,6 @@ public class TenantsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,9 +62,13 @@ public class TenantsFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
 
-        mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
+
+        mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends")
+                .child(mCurrent_user_id);
+
         mFriendsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
@@ -100,8 +103,8 @@ public class TenantsFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull Tenants friends) {
-                tenantsViewHolder.setDate(friends.getDate());
+            protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull Tenants tenants) {
+                tenantsViewHolder.setDate(tenants.getDate());
 
                 final String list_user_id = getRef(i).getKey();
 

@@ -1,6 +1,6 @@
 package com.example.propertymanagment;
 
-    public class Tenants {
+public class Tenants {
 
         public String date;
         public String mStatus;

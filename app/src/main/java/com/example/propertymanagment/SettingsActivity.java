@@ -37,7 +37,7 @@ import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SettingsActivity extends AppCompatActivity {
+public class    SettingsActivity extends AppCompatActivity {
 
     private DatabaseReference mUserDatabase;
     private FirebaseUser mCurrentUser;

@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
+                Intent loadAddTenantActivity = new Intent(MainActivity.this, AddTenant.class);
+                startActivity(loadAddTenantActivity);
             }
         });
         mChat.setOnClickListener(new View.OnClickListener() {

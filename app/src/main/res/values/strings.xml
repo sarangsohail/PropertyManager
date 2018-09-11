@@ -42,7 +42,7 @@
     <string name="Insurance_textview_underline"><u>Insurance</u></string>
     <string name="Bills_textview_underline"><u>Bills</u></string>
     <string name="Mortgage_textview_underline"><u>Mortgage</u></string>
-
+    <string name="sent_rent_date_underline"><u>Rent Due</u></string>
     <string name="rent_dialog_text">Rent</string>
 
 </resources>

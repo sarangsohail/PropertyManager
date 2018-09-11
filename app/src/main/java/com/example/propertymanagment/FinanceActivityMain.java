@@ -1,16 +1,20 @@
 package com.example.propertymanagment;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Paint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.util.Calendar;
+
+import chart_and_graphs.FinancePieChartActivity;
 
 public class FinanceActivityMain extends AppCompatActivity implements InsuranceDialog.InsuranceDialogListener, BillsDialog.billDialogListener, MortageDialog.MortageDialogListener{
 
@@ -25,8 +29,9 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
     private float insurancePieChart;
     private float billsPieChart;
     private float mortgagePieChart;
-
-
+    private DatePickerDialog.OnDateSetListener mOnDateSetListener;
+    private Button dateSetButton;
+    private TextView datesetTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +45,36 @@ public class FinanceActivityMain extends AppCompatActivity implements InsuranceD
         mortgageTextView = (TextView) findViewById(R.id.mortgage_display_financeMain);
         changeMortgageBtn = (Button) findViewById(R.id.mortgage_dialog_Button);
         different_format_button = (Button) findViewById(R.id.piechartButton_financeMain);
+        dateSetButton = (Button) findViewById(R.id.selectDate_financeMain_btn);
+        datesetTextView = (TextView) findViewById(R.id.date_text_financeMain);
 
+        dateSetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+                DatePickerDialog datePickerDialog = new DatePickerDialog(FinanceActivityMain.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mOnDateSetListener,
+                        year,month,day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+        mOnDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                //if month equals '0'
+                i1 = i1 +1;
+
+                String currentDate = i2 +"/"+  i1 + "/" + i;
+                datesetTextView.setText(currentDate);
+            }
+        };
 
         //button listeners
         changeInsuranceBtn.setOnClickListener(new View.OnClickListener() {
