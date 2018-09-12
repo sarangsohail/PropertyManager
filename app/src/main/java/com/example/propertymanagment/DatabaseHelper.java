@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import java.io.PipedOutputStream;
 
+//helper for adding properties to db
 class DatabaseHelper extends SQLiteOpenHelper{
+
 
     public static final String TAG = "database.helper.";
 

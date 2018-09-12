@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddTenantActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/input_layout_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-44dp"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="Tenant Name"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_name"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="44dp">
+
+        <EditText
+            android:id="@+id/tenant_name_edittext"
+            android:layout_width="243dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/rounded_edit_text"
+            android:paddingLeft="4dp"
+            android:text="" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp"
+        android:paddingTop="4dp"
+        android:text="Tenancy Terms"
+        android:textColor="@color/colorRed"
+        android:textSize="18dp" />
+
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="190dp"
+        android:paddingTop="7dp"
+        android:text="Deposit (£) *"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="122dp"
+        android:paddingLeft="4dp"
+        android:text="Rent (£) * "
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView9"
+        android:layout_alignStart="@+id/null"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="190dp"
+        android:text="Rent Due Date"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/deposit_add_prop"
+        android:layout_width="112dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="231dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:paddingLeft="4dp" />
+
+    <EditText
+        android:id="@+id/rent_add_prop2"
+        android:layout_width="112dp"
+        android:layout_height="36dp"
+        android:layout_above="@+id/textView9"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-190dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:hint="Monthly"
+        android:inputType="numberDecimal"
+        android:paddingLeft="4dp" />
+
+    <Button
+        android:id="@+id/tenant_add_new_prop_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_above="@+id/textView9"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-193dp"
+        android:layout_weight="1"
+        android:background="@color/green"
+        android:padding="4dp"
+        android:text="Add Property" />
+
+    <Button
+        android:id="@+id/prop_button_save2"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="85dp"
+        android:layout_weight="1"
+        android:background="@color/green"
+        android:text="Save" />
+
+    <Button
+            android:id="@+id/view_all_properties_button"
+            android:layout_width="208dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_purple"
+            android:text="View All Properties" />
+
+
+    </RelativeLayout>

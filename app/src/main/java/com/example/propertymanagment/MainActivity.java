@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                Intent loadAddTenantActivity = new Intent(MainActivity.this, AddTenant.class);
+                Intent loadAddTenantActivity = new Intent(MainActivity.this, AddTenantActivity.class);
                 startActivity(loadAddTenantActivity);
             }
         });
