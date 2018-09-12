@@ -51,9 +51,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="104dp"
+        android:paddingBottom="5dp"
         android:paddingTop="4dp"
         android:text="Tenancy Terms"
         android:textColor="@color/colorRed"
@@ -66,8 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="215dp"
         android:paddingTop="7dp"
         android:text="Deposit (£) *"
         android:textSize="18dp"
@@ -77,10 +77,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tenant_add_new_prop_btn"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="122dp"
         android:paddingLeft="4dp"
+        android:paddingTop="5dp"
         android:text="Rent (£) * "
         android:textSize="18dp"
         android:textStyle="bold" />
@@ -89,39 +89,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView9"
-        android:layout_alignStart="@+id/null"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginLeft="130dp"
         android:text="Rent Due Date"
         android:textSize="18dp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/deposit_add_prop"
+        android:id="@+id/rent_date"
         android:layout_width="112dp"
         android:layout_height="36dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="231dp"
+        android:layout_alignTop="@+id/tenant_deposit"
+        android:layout_centerHorizontal="true"
         android:layout_weight="1"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         android:paddingLeft="4dp" />
 
     <EditText
-        android:id="@+id/rent_add_prop2"
+        android:id="@+id/tenant_deposit"
+        android:layout_width="112dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView9"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:inputType="number"
+        android:paddingLeft="4dp" />
+
+    <EditText
+        android:id="@+id/tenant_rent"
         android:layout_width="112dp"
         android:layout_height="36dp"
         android:layout_above="@+id/textView9"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="-190dp"
+        android:layout_marginBottom="-220dp"
         android:layout_weight="1"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:hint="Monthly"
         android:inputType="numberDecimal"
-        android:paddingLeft="4dp" />
+        android:paddingLeft="4dp"
+        android:paddingTop="2dp" />
 
     <Button
         android:id="@+id/tenant_add_new_prop_btn"
@@ -129,14 +139,15 @@
         android:layout_height="40dp"
         android:layout_above="@+id/textView9"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-193dp"
+        android:layout_marginBottom="-215dp"
         android:layout_weight="1"
-        android:background="@color/green"
+        android:background="@android:color/holo_purple"
         android:padding="4dp"
-        android:text="Add Property" />
+        android:text="Add Property"
+        android:textColor="@color/colorWhite" />
 
     <Button
-        android:id="@+id/prop_button_save2"
+        android:id="@+id/save_tenant_button"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

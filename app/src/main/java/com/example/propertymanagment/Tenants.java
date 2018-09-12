@@ -1,5 +1,6 @@
 package com.example.propertymanagment;
 
+//model for tenants in the chatting activity
 public class Tenants {
 
         public String date;
