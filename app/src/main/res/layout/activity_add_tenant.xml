@@ -8,9 +8,9 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="294dp"
+        android:layout_alignBottom="@+id/list_data"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="60dp">
@@ -29,6 +29,14 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
+    <ProgressBar
+        android:id="@+id/circular_progress"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_name"
         android:layout_width="250dp"
@@ -41,7 +49,7 @@
             android:id="@+id/tenant_name_edittext"
             android:layout_width="243dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="6dp"
+            android:layout_alignParentStart="true"
             android:background="@drawable/rounded_edit_text"
             android:paddingLeft="4dp"
             android:text="" />
@@ -61,6 +69,13 @@
         android:textSize="18dp" />
 
 
+    <ListView
+        android:id="@+id/list_data"
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"></ListView>
+
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
@@ -77,7 +92,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tenant_add_new_prop_btn"
         android:layout_alignParentStart="true"
         android:paddingLeft="4dp"
         android:paddingTop="5dp"
@@ -133,40 +147,4 @@
         android:paddingLeft="4dp"
         android:paddingTop="2dp" />
 
-    <Button
-        android:id="@+id/tenant_add_new_prop_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_above="@+id/textView9"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-215dp"
-        android:layout_weight="1"
-        android:background="@android:color/holo_purple"
-        android:padding="4dp"
-        android:text="Add Property"
-        android:textColor="@color/colorWhite" />
-
-    <Button
-        android:id="@+id/save_tenant_button"
-        android:layout_width="208dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="85dp"
-        android:layout_weight="1"
-        android:background="@color/green"
-        android:text="Save" />
-
-    <Button
-            android:id="@+id/view_all_properties_button"
-            android:layout_width="208dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="24dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_purple"
-            android:text="View All Properties" />
-
-
-    </RelativeLayout>
+</RelativeLayout>

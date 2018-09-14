@@ -17,6 +17,12 @@ public class TenantsListViewAdapter extends BaseAdapter {
     Activity activity;
     List<AddingTenants> tenants;
     LayoutInflater inflater;
+
+    public TenantsListViewAdapter(Activity activity, List<AddingTenants> tenants) {
+        this.activity = activity;
+        this.tenants = tenants;
+    }
+
     @Override
     public int getCount() {
         return tenants.size();
