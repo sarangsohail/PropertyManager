@@ -34,8 +34,5 @@ public class AllTenantsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_tenants);
 
-
-
-
     }
 }

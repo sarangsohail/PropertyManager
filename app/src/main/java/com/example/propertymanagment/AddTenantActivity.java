@@ -44,7 +44,7 @@ public class AddTenantActivity extends AppCompatActivity {
         rentDueDate = (EditText) findViewById(R.id.rent_date);
         listData = (ListView)findViewById(R.id.list_data);
 
-       gi//firebase setup
+       //firebase setup
         initFirebase();
         addFirebaseEventListener();
 
