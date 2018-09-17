@@ -43,13 +43,16 @@ public class TenantsListViewAdapter extends BaseAdapter {
         inflater = (LayoutInflater)activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView  = inflater.inflate(R.layout.activity_all_tenants, null);
 
-        EditText tenantName = (EditText) itemView.findViewById(R.id.tenant_name_edittext);
-        EditText tenantRent = (EditText) itemView.findViewById(R.id.tenant_rent);
-        EditText tenantDeposit = (EditText)itemView.findViewById(R.id.tenant_deposit);
-        EditText rent_due_date = (EditText) itemView.findViewById(R.id.rent_date);
+        EditText tenantName = (EditText) itemView.findViewById(R.id.);
+        EditText tenantRent = (EditText) itemView.findViewById(R.id.);
+        EditText tenantDeposit = (EditText)itemView.findViewById(R.id.);
+        EditText tenant_rent_due_date = (EditText) itemView.findViewById(R.id.);
 
         tenantName.setText(tenants.get(i).getName());
         tenantRent.setText(tenants.get(i).getRent());
+        tenantDeposit.setText(tenants.get(i).getDeposit());
+        tenant_rent_due_date.setText(tenants.get(i).getRentDueDate());
+
         //repeat the above for deposit and due date
 
         return itemView;

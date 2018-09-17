@@ -3,7 +3,7 @@ public class AddingTenants {
 //model for adding tenants
 
     
-    String uid, name, deposit, rent, rentDueDate;
+   private String uid, name, deposit, rent, rentDueDate;
 
     public AddingTenants(){
 
@@ -15,6 +15,8 @@ public class AddingTenants {
         this.rent = rent;
         this.rentDueDate = rentDueDate;
     }
+
+
 
     public String getUid() {
 
