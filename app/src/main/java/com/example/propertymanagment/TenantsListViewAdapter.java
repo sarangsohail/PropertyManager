@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -43,10 +44,10 @@ public class TenantsListViewAdapter extends BaseAdapter {
         inflater = (LayoutInflater)activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView  = inflater.inflate(R.layout.activity_all_tenants, null);
 
-        EditText tenantName = (EditText) itemView.findViewById(R.id.);
-        EditText tenantRent = (EditText) itemView.findViewById(R.id.);
-        EditText tenantDeposit = (EditText)itemView.findViewById(R.id.);
-        EditText tenant_rent_due_date = (EditText) itemView.findViewById(R.id.);
+        TextView tenantName = (TextView) itemView.findViewById(R.id.tenantListName);
+        TextView tenantRent = (TextView) itemView.findViewById(R.id.tenant_list_rent);
+        TextView tenantDeposit = (TextView)itemView.findViewById(R.id.tenant_list_deposit);
+        TextView tenant_rent_due_date = (TextView) itemView.findViewById(R.id.tenant_list_dueDate);
 
         tenantName.setText(tenants.get(i).getName());
         tenantRent.setText(tenants.get(i).getRent());
