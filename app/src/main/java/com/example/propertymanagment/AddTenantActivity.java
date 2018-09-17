@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,8 @@ public class AddTenantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_tenant);
 
         getSupportActionBar().setTitle("Add A New Tenant");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         tenantName = (EditText) findViewById(R.id.tenant_name_edittext);
         rent = (EditText) findViewById(R.id.tenant_rent);
         deposit = (EditText) findViewById(R.id.tenant_deposit);
