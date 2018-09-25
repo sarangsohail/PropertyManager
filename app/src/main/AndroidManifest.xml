@@ -77,7 +77,7 @@
             android:name=".FinanceActivityMain"
             android:parentActivityName="chart_and_graphs.ScatterGraph" />
         <activity android:name=".AddTenantActivity" />
-        <activity android:name=".AllTenantsActivity"></activity>
+        <!--<activity android:name=".AllTenantsActivity"></activity>-->
     </application>
 
 </manifest>

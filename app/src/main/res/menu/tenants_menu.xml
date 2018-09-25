@@ -7,14 +7,14 @@
         android:title="Add"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/save_tenant"
-        android:title="Save"
-        android:icon="@drawable/ic_save_black_24dp"
-        app:showAsAction="always"/>
 
     <item android:id="@+id/remove_tenant"
         android:title="Remove"
         android:icon="@drawable/ic_remove_circle_outline_black_24dp"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/save_tenant"
+        android:title="Save"
+        android:icon="@drawable/ic_save_black_24dp"
+        app:showAsAction="always"/>
 </menu>

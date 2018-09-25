@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -114,6 +115,7 @@ public class AddTenantActivity extends AppCompatActivity {
         mDatabaseReference.child("Tenants").child(tenant.getUid()).child("dueDate").setValue(tenant.getRentDueDate());
 
         clearAllText();
+        Toast.makeText(this, "Tenant Updated", Toast.LENGTH_SHORT).show();
     }
 
     private void createTenant() {
@@ -124,6 +126,7 @@ public class AddTenantActivity extends AppCompatActivity {
         mDatabaseReference.child("Tenants").child(tenant.getUid()).setValue(tenant);
 
         clearAllText();
+        Toast.makeText(this, "Tenant Added", Toast.LENGTH_SHORT).show();
     }
 
     private void clearAllText() {
@@ -171,6 +174,7 @@ public class AddTenantActivity extends AppCompatActivity {
         mDatabaseReference.child("Tenants").child(tenant.getUid()).removeValue();
         clearAllText();
 
+        Toast.makeText(this, "Tenant Deleted", Toast.LENGTH_SHORT).show();
     }
 
     private void initFirebase() {

@@ -44,5 +44,7 @@
     <string name="Mortgage_textview_underline"><u>Mortgage</u></string>
     <string name="sent_rent_date_underline"><u>Rent Due</u></string>
     <string name="rent_dialog_text">Rent</string>
+    <string name="tenantName">Tenant</string>
+    <string name="blank">%d</string>
 
 </resources>
