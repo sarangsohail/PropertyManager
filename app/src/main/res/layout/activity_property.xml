@@ -171,11 +171,10 @@
         android:id="@+id/rent_add_prop"
         android:layout_width="112dp"
         android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="290dp"
-        android:layout_marginLeft="4dp"
+        android:layout_centerVertical="true"
         android:layout_weight="1"
+        android:layout_marginLeft="4dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:inputType="numberDecimal" />
@@ -184,9 +183,9 @@
         android:id="@+id/payment_frequency_spinner"
         android:layout_width="84dp"
         android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="290dp"
-        android:layout_marginLeft="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="134dp"
         android:background="@drawable/rounded_edit_text">
 
     </Spinner>
@@ -196,20 +195,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="257dp"
+        android:layout_marginBottom="241dp"
+        android:text="Bedroom(s)"
         android:textSize="18dp"
-        android:layout_marginLeft="4dp"
-        android:textStyle="bold"
-        android:text="Bedroom(s)" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="257dp"
-        android:layout_marginLeft="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="241dp"
         android:text="Bathroom(s)"
         android:textSize="18dp"
         android:textStyle="bold" />
@@ -220,7 +218,7 @@
         android:layout_height="36dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="215dp"
+        android:layout_marginBottom="194dp"
         android:layout_marginLeft="4dp"
         android:background="@drawable/rounded_edit_text" />
 
@@ -228,10 +226,8 @@
         android:id="@+id/bathroom_spinner_add_prop"
         android:layout_width="92dp"
         android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="215dp"
-        android:layout_marginLeft="150dp"
+        android:layout_alignTop="@+id/bedroom_spinner_add_prop"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_edit_text" />
 
     <Button
@@ -253,6 +249,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
         android:layout_weight="1"
+        android:textColor="@color/colorWhite"
         android:background="@android:color/holo_purple"
         android:text="View All Properties" />
 
