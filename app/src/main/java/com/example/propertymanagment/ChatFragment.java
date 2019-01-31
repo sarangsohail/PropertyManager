@@ -167,12 +167,7 @@ public class ChatFragment extends Fragment {
 
 //                      String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
 
-                      if(dataSnapshot.hasChild("online")) {
 
-                          String userOnline = dataSnapshot.child("online").getValue().toString();
-                          holder.setUserOnline(userOnline);
-
-                      }
 
                       //         holder.setUserImage(userThumb, getContext());
 
@@ -237,21 +232,7 @@ public class ChatFragment extends Fragment {
         }
 
 
-        public void setUserOnline(String online_status) {
 
-            ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);
-
-            if(online_status.equals("true")){
-
-                userOnlineView.setVisibility(View.VISIBLE);
-
-            } else {
-
-                userOnlineView.setVisibility(View.INVISIBLE);
-
-            }
-
-        }
 
 
     }

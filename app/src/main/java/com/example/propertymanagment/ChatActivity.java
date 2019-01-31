@@ -127,22 +127,6 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String online;
-
-                if (dataSnapshot.hasChild("online")){
-                   online = dataSnapshot.child("online").getValue().toString();
-                }else{
-                    return;
-                }
-
-                GetTimeAgo getTimeAgo = null;
-
-                if(online.equals("true")) {
-
-                    lastSeenView.setText(R.string.chat_online_string);
-
-                }
-
                 //todo - sort this last seen thing out
 //                 getTimeAgo = new GetTimeAgo();
 //

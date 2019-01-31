@@ -5,8 +5,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,13 +19,13 @@ import com.google.firebase.database.ServerValue;
 
 public class MessagingMainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MessagingMainActivity";
     private FirebaseAuth mAuth;
     private ViewPager mViewPager;
-
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private TabLayout mTabLayout;
-
     private DatabaseReference mUserRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,14 +33,13 @@ public class MessagingMainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        getSupportActionBar().setTitle("Chats");
+       // getSupportActionBar().setTitle("Chats");
 
         if (mAuth.getCurrentUser() != null) {
-
-
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        }else{
 
-
+            Toast.makeText(this, "user ref problem", Toast.LENGTH_SHORT).show();
         }
 
         //tab viewpager
@@ -55,36 +56,23 @@ public class MessagingMainActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.d(TAG, "start onStart");
 
         if(currentUser == null){
 
             sendToStartActivity();
 
-        } else {
-
-            mUserRef.child("online").setValue("true");
-
         }
+        Log.d(TAG, "end on of onStart");
 
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        FirebaseUser mCurrentUser = mAuth.getCurrentUser();
-
-        if (mCurrentUser != null) {
-
-            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
-        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.chat_menu, menu);
 
+        getMenuInflater().inflate(R.menu.chat_menu, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -92,8 +80,8 @@ public class MessagingMainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+
         if (item.getItemId() == R.id.main_signout_button){
-            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
             FirebaseAuth.getInstance().signOut();
             sendToStartActivity();
         }

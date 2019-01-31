@@ -33,11 +33,6 @@ public class PropertyManager extends Application {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    if (dataSnapshot != null) {
-
-                        mUserDatabase.child("online")
-                                .onDisconnect().setValue(ServerValue.TIMESTAMP);
-                    }
 
                 }
 
