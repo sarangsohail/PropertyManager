@@ -1,12 +1,13 @@
 package com.example.propertymanagment;
 
 
-import android.app.Activity;
-import android.app.Application;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LongDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,14 +29,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class TenantsFragment extends Fragment {
 
     private static final String TAG = "TenantsFragment";
-    private RecyclerView mTenantsList;
+    private RecyclerView mFriendsList;
 
-    private DatabaseReference mTenantsDatabase;
     private DatabaseReference mUsersDatabase;
+    private DatabaseReference mFriendsDatabase;
 
     private FirebaseAuth mAuth;
 
@@ -44,10 +48,10 @@ public class TenantsFragment extends Fragment {
 
     DatabaseReference mUserRef;
 
-
     public TenantsFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,20 +59,21 @@ public class TenantsFragment extends Fragment {
 
         mMainView = inflater.inflate(R.layout.activity_friends_fragment, container, false);
 
-        mTenantsList = (RecyclerView) mMainView.findViewById(R.id.TenantsRV);
+        mFriendsList = (RecyclerView) mMainView.findViewById(R.id.TenantsRV);
 
         mAuth = FirebaseAuth.getInstance();
 
-
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
 
-        mTenantsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
-        mTenantsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
 
-        mTenantsList.setHasFixedSize(true);
-        mTenantsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
+        mFriendsDatabase.keepSynced(true);
+
+
+        mFriendsList.setHasFixedSize(true);
+        mFriendsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return mMainView;
     }
@@ -77,118 +82,107 @@ public class TenantsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        Toast.makeText(getContext(), "Before recycler options", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "before recylcer options");
+
         FirebaseRecyclerOptions<Tenants> options =
                 new FirebaseRecyclerOptions.Builder<Tenants>()
                         .setQuery(mUsersDatabase, Tenants.class)
                         .build();
-
-        Toast.makeText(getContext(), "after recycler options", Toast.LENGTH_SHORT).show();
-
-        Log.d(TAG, "after recylcer options");
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
-            @Override
-            public TenantsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.users_single_layout, parent, false);
-
-                Toast.makeText(getContext(), "inside oncreate holder", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "inside oncreate holder");
-                return new TenantsViewHolder(view);
-            }
-
-            //old recycler code before 29th of Jan
-//        FirebaseRecyclerAdapter<Tenants, TenantsViewHolder> adapter =
-//                new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
-//
-//            @NonNull
-//            @Override
-//            public TenantsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//
-//                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_single_layout, viewGroup, false);
-//                Log.d(TAG , "after tenants view holder");
-//
-//                //TODO - think this is the bug i think above - it crashes after the comment
-//                return new TenantsViewHolder(view);
-//
-//            }
-
-            @Override
-            protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull Tenants tenants) {
-                Log.d(TAG, "inside bindViewholder");
+        Toast.makeText(getContext(), mCurrent_user_id + " userdatabase =" + mUsersDatabase.toString(), Toast.LENGTH_LONG).show();
+        Log.d(TAG, "current  "+ mCurrent_user_id + "     userDatabase"  + mUsersDatabase.toString());
+        FirebaseRecyclerAdapter<Tenants, TenantsViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
 
 
-                tenantsViewHolder.setDate(tenants.getDate());
+                    @NonNull
+                    @Override
+                    public TenantsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                        View view = LayoutInflater.from(viewGroup.getContext())
+                                .inflate(R.layout.users_single_layout, viewGroup, false);
 
-                final String list_user_id = getRef(i).getKey();
+                        return new TenantsViewHolder(view);
 
-                    mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                    }
 
+                    @Override
+                    protected void onBindViewHolder(final TenantsViewHolder tenantsViewHolder, int i, @NonNull Tenants friends) {
+                        tenantsViewHolder.setDate(friends.getDate());
+
+                       final  String list_user_id = getRef(i).getKey();
+                        Toast.makeText(getContext(), list_user_id, Toast.LENGTH_SHORT).show();
+
+                        mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
                                 final String userName = dataSnapshot.child("name").getValue().toString();
+                                final String userStatus = dataSnapshot.child("status").getValue().toString();
 
-                              //  final String userStatus = dataSnapshot.child("status").getValue().toString();
+                                Toast.makeText(getContext(), "in bind view holder" + userName, Toast.LENGTH_SHORT).show();
+                                if (dataSnapshot.hasChild("online")) {
 
+                                    String userOnline = dataSnapshot.child("online").getValue().toString();
+                                    tenantsViewHolder.setUserOnline(userOnline);
 
-                            //    tenantsViewHolder.setStatus(userStatus);
-                            // friendsViewHolder.setUserImage(userThumb, getContext());
-                            tenantsViewHolder.setName(userName);
-
-                            tenantsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                    //on user click options
-                                    CharSequence options[] = new CharSequence[]{"Open Profile", "Send message"};
-
-                                    final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-                                    builder.setTitle("Select Options");
-                                    builder.setItems(options, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                                            //event for each option user clicks on the user
-                                            if (i == 0) {
-
-                                                Intent profileIntent = new Intent(getContext(), ProfileActivity.class);
-                                                profileIntent.putExtra("user_id", list_user_id);
-                                                startActivity(profileIntent);
-
-                                            }
-
-                                            if (i == 1) {
-
-                                                Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-                                                chatIntent.putExtra("user_id", list_user_id);
-                                                // chatIntent.putExtra("user_name", userName);
-                                                startActivity(chatIntent);
-
-                                            }
-
-                                        }
-                                    });
-                                    builder.show();
+                                }else {
+                                    tenantsViewHolder.setUserOnline("offline");
                                 }
-                            });
-                        }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                                tenantsViewHolder.setStatus(userStatus);
+                                // friendsViewHolder.setUserImage(userThumb, getContext());
+                                tenantsViewHolder.setName(userName);
 
-                            Log.d("database error", databaseError.toString());
-                        }
-                    });
-                }
+                                tenantsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
 
+                                        //on user click options
+                                        CharSequence options[] = new CharSequence[]{"Open Profile", "Send message"};
 
-        };
+                                        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        mTenantsList.setAdapter(adapter);
+                                        builder.setTitle("Select Options");
+                                        builder.setItems(options, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                //event for each option user clicks on the user
+                                                if (i == 0) {
+
+                                                    Intent profileIntent = new Intent(getContext(), ProfileActivity.class);
+                                                    profileIntent.putExtra("user_id", list_user_id);
+                                                    startActivity(profileIntent);
+
+                                                }
+
+                                                if (i == 1) {
+
+                                                    Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                                    chatIntent.putExtra("user_id", list_user_id);
+                                                    // chatIntent.putExtra("user_name", userName);
+                                                    startActivity(chatIntent);
+
+                                                }
+
+                                            }
+                                        });
+                                        builder.show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                                Log.d("database error", databaseError.toString());
+                            }
+                        });
+
+                    }
+                };
+
+        mFriendsList.setAdapter(adapter);
         adapter.startListening();
+
 
     }
 
@@ -230,7 +224,11 @@ public class TenantsFragment extends Fragment {
 //            Picasso.get().load(thumb_image).placeholder(R.drawable.default_profile_pic).into(userImageView);
 //
 //        }
+        public void setUserOnline(String online_status) {
 
+
+            }
+
+        }
 
     }
-}

@@ -125,7 +125,7 @@ public class ChatFragment extends Fragment {
                       Log.d(TAG, " BEFORE ---- IN THE DATA SNAPSHOT ");
 
                       String data = dataSnapshot.child("message").getValue().toString();
-                      holder.setMessage(data, model.isSeen());
+//                      holder.setMessage(data, model.isSeen());
                       Log.d(TAG, " AFTER ---- IN THE DATA SNAPSHOT ");
 
                   }
@@ -214,7 +214,7 @@ public class ChatFragment extends Fragment {
         public void setMessage(String message, boolean isSeen){
 
             TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
-            userStatusView.setText(message);
+//            userStatusView.setText(message);
 
             if(!isSeen){
                 userStatusView.setTypeface(userStatusView.getTypeface(), Typeface.BOLD);
@@ -227,7 +227,7 @@ public class ChatFragment extends Fragment {
         public void setName(String name){
 
             TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
-            userNameView.setText(name);
+//            userNameView.setText(name);
 
         }
 
