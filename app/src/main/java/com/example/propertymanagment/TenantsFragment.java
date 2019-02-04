@@ -87,8 +87,6 @@ public class TenantsFragment extends Fragment {
                 new FirebaseRecyclerOptions.Builder<Tenants>()
                         .setQuery(mUsersDatabase, Tenants.class)
                         .build();
-        Toast.makeText(getContext(), mCurrent_user_id + " userdatabase =" + mUsersDatabase.toString(), Toast.LENGTH_LONG).show();
-        Log.d(TAG, "current  "+ mCurrent_user_id + "     userDatabase"  + mUsersDatabase.toString());
         FirebaseRecyclerAdapter<Tenants, TenantsViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Tenants, TenantsViewHolder>(options) {
 
@@ -108,7 +106,6 @@ public class TenantsFragment extends Fragment {
                         tenantsViewHolder.setDate(friends.getDate());
 
                        final  String list_user_id = getRef(i).getKey();
-                        Toast.makeText(getContext(), list_user_id, Toast.LENGTH_SHORT).show();
 
                         mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -117,7 +114,6 @@ public class TenantsFragment extends Fragment {
                                 final String userName = dataSnapshot.child("name").getValue().toString();
                                 final String userStatus = dataSnapshot.child("status").getValue().toString();
 
-                                Toast.makeText(getContext(), "in bind view holder" + userName, Toast.LENGTH_SHORT).show();
                                 if (dataSnapshot.hasChild("online")) {
 
                                     String userOnline = dataSnapshot.child("online").getValue().toString();

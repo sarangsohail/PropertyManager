@@ -1,6 +1,7 @@
 package com.example.propertymanagment;
 
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -89,8 +91,7 @@ public class ChatFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        //sort the ordering of the messagees in the RV
-        Query conversationQuery = mConvDatabase.orderByChild("timestamp");
+        Query conversationQuery = mConvDatabase;
 
         FirebaseRecyclerOptions<Conv> options =
                 new FirebaseRecyclerOptions.Builder<Conv>()
@@ -117,16 +118,13 @@ public class ChatFragment extends Fragment {
               final String list_user_id = getRef(position).getKey();
 
               Query lastMessageQuery = mMessageDatabase.child(list_user_id).limitToLast(1);
-              Log.d(TAG, " AFTER THE 'LAST QUERY MESSAGE'---- ");
 
               lastMessageQuery.addChildEventListener(new ChildEventListener() {
                   @Override
                   public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                      Log.d(TAG, " BEFORE ---- IN THE DATA SNAPSHOT ");
 
                       String data = dataSnapshot.child("message").getValue().toString();
-//                      holder.setMessage(data, model.isSeen());
-                      Log.d(TAG, " AFTER ---- IN THE DATA SNAPSHOT ");
+                     holder.setMessage(data);
 
                   }
 
@@ -151,18 +149,18 @@ public class ChatFragment extends Fragment {
                   }
               });
 
-              Log.d(TAG, " BEFORE THE M USER DATABASE");
               mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                   @Override
                   public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                      if (dataSnapshot.hasChild("name")) {
+                      if (dataSnapshot.hasChild("name") ) {
 
-                          Log.d(TAG, " BEFORE ---- DATASNAPSHOT NAME CHILD");
                           final String userName = dataSnapshot.child("name").getValue().toString();
-                          holder.setName(userName);
+//                          holder.setName(userName);
 
+
+                          //TODO - SORT THE MAIN MESSAGING PAGE 0UT 0 USER NAME AND MESSAGE DISPLAY
                       }
 
 //                      String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
@@ -211,16 +209,12 @@ public class ChatFragment extends Fragment {
 
         }
 
-        public void setMessage(String message, boolean isSeen){
+        public void setMessage(String message){
 
-            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+//            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
 //            userStatusView.setText(message);
 
-            if(!isSeen){
-                userStatusView.setTypeface(userStatusView.getTypeface(), Typeface.BOLD);
-            } else {
-                userStatusView.setTypeface(userStatusView.getTypeface(), Typeface.NORMAL);
-            }
+
 
         }
 
@@ -229,6 +223,7 @@ public class ChatFragment extends Fragment {
             TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
 //            userNameView.setText(name);
 
+            Log.d(TAG, "setName: " + name);
         }
 
 

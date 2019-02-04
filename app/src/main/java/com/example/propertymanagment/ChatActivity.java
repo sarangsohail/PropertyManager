@@ -204,9 +204,9 @@ public class ChatActivity extends AppCompatActivity {
                     //information for the message being sent
                     Map messageMap = new HashMap();
                     messageMap.put("message", message);
-                    messageMap.put("seen", false);
+                    //messageMap.put("seen", false);
                     messageMap.put("type", "text");
-                    messageMap.put("time", ServerValue.TIMESTAMP);
+                    //messageMap.put("time", ServerValue.TIMESTAMP);
                     messageMap.put("from", mCurrentUserID);
 
 

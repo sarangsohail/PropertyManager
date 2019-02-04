@@ -39,7 +39,6 @@ public class MessagingMainActivity extends AppCompatActivity {
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         }else{
 
-            Toast.makeText(this, "user ref problem", Toast.LENGTH_SHORT).show();
         }
 
         //tab viewpager
