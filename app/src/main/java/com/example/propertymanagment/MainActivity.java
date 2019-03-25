@@ -25,9 +25,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class MainActivity extends AppCompatActivity  {
 
+    private static final String TAG = "Firebase_Token_Instance" ;
     private FirebaseAuth mAuth;
     private DatabaseReference mUserRef;
 
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity  {
         mEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
             }
         });

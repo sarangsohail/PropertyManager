@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -124,7 +125,7 @@ public class ChatFragment extends Fragment {
                   public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                       String data = dataSnapshot.child("message").getValue().toString();
-                     holder.setMessage(data);
+                      holder.setMessage(data);
 
                   }
 
@@ -157,10 +158,9 @@ public class ChatFragment extends Fragment {
                       if (dataSnapshot.hasChild("name") ) {
 
                           final String userName = dataSnapshot.child("name").getValue().toString();
-//                          holder.setName(userName);
+                          holder.setName(userName);
 
 
-                          //TODO - SORT THE MAIN MESSAGING PAGE 0UT 0 USER NAME AND MESSAGE DISPLAY
                       }
 
 //                      String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
@@ -211,7 +211,7 @@ public class ChatFragment extends Fragment {
 
         public void setMessage(String message){
 
-//            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
 //            userStatusView.setText(message);
 
 
