@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.google.firebase.messaging.RemoteMessage;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
@@ -18,6 +21,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         String notification_title = remoteMessage.getNotification().getTitle();
         String notification_message = remoteMessage.getNotification().getBody();
 
+        Log.i(TAG, "test message" + remoteMessage.getData());
         String click_action = remoteMessage.getNotification().getClickAction();
 
         String ChannelID = "String";

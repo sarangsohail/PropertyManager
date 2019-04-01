@@ -76,8 +76,9 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                Intent propertyIntent = new Intent(MainActivity.this, PropertyActivity.class);
-                startActivity(propertyIntent);
+                Toast.makeText(MainActivity.this, "testt    ", Toast.LENGTH_SHORT).show();
+//                Intent propertyIntent = new Intent(MainActivity.this, PropertyActivity.class);
+//                startActivity(propertyIntent);
             }
         });
 
@@ -110,7 +111,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-
+                Intent loadVideoStreamingActivity = new Intent(MainActivity.this, video_streaming_activity.class);
+                startActivity((loadVideoStreamingActivity   ));
             }
         });
 
