@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="chart_and_graphs.FinancePieChartActivity">
+    tools:context=".FinancePieChartActivity">
 
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"

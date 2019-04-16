@@ -85,10 +85,10 @@ public class MessagingMainActivity extends AppCompatActivity {
             sendToStartActivity();
         }
 
-        if (item.getItemId() == R.id.main_settings_menu_button){
-            Intent settingsIntent = new Intent(MessagingMainActivity.this, SettingsActivity.class);
-            startActivity(settingsIntent);
-        }
+//        if (item.getItemId() == R.id.main_settings_menu_button){
+//            Intent settingsIntent = new Intent(MessagingMainActivity.this, SettingsActivity.class);
+//            startActivity(settingsIntent);
+//        }
         if (item.getItemId() == R.id.all_users_item){
 
             Intent userIntent = new Intent(

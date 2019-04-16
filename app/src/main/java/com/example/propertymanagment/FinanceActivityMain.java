@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-import chart_and_graphs.FinancePieChartActivity;
-
 public class FinanceActivityMain extends AppCompatActivity implements InsuranceDialog.InsuranceDialogListener, BillsDialog.billDialogListener, MortageDialog.MortageDialogListener{
 
     private static final String TAG = "FinanceMainActivity";
