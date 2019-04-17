@@ -13,16 +13,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".video_streaming_activity"
             android:label="@string/title_activity_video_streaming_activity"></activity>
-
-        <service android:name=".FirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -40,9 +35,6 @@
             android:name=".LoginActivity"
             android:parentActivityName=".StartActivity" />
         <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MessagingMainActivity" />
-        <activity
             android:name=".StatusActivity"
             android:parentActivityName=".StatusActivity" />
         <activity
@@ -53,7 +45,7 @@
             android:parentActivityName=".MessagingMainActivity" />
         <activity
             android:name=".ProfileActivity"
-            android:parentActivityName=".SettingsActivity">
+            >
             <intent-filter>
                 <action android:name="in.sarang.propertyManager_TARGET_NOTIFICATION" />
 
