@@ -47,7 +47,7 @@ public class AddTenantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tenant);
 
-        getSupportActionBar().setTitle("Add A New Tenant");
+//        getSupportActionBar().setTitle("Add A New Tenant");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         tenantName = (EditText) findViewById(R.id.tenant_name_edittext);
@@ -169,10 +169,15 @@ public class AddTenantActivity extends AppCompatActivity {
 
 
     private void removeTenant(AddingTenants tenant) {
-        mDatabaseReference.child("Tenants").child(tenant.getUid()).removeValue();
-        clearAllText();
+        try {
+            mDatabaseReference.child("Tenants").child(tenant.getUid()).removeValue();
+            clearAllText();
 
-        Toast.makeText(this, "Tenant Deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tenant Deleted", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "There was a problem removing the tenant, try again.", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     private void initFirebase() {
