@@ -91,13 +91,18 @@ public class AddTenantActivity extends AppCompatActivity {
         }
         else if(item.getItemId() == R.id.save_tenant)
         {
-            AddingTenants tenant = new AddingTenants(selectedTenant.getUid(),
-                    tenantName.getText().toString(),
-                    rent.getText().toString(),
-                    deposit.getText().toString(),
-                    rentDueDate.getText().toString());
+            try {
+                AddingTenants tenant = new AddingTenants(selectedTenant.getUid(),
+                        tenantName.getText().toString(),
+                        rent.getText().toString(),
+                        deposit.getText().toString(),
+                        rentDueDate.getText().toString());
 
-            updateTenant(tenant);
+                updateTenant(tenant);
+            } catch (Exception e) {
+                Toast.makeText(this, "There was a problem saving the tenant, please try again", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         }
         else if(item.getItemId() == R.id.remove_tenant){
             removeTenant(selectedTenant);
@@ -106,14 +111,19 @@ public class AddTenantActivity extends AppCompatActivity {
     }
 
     private void updateTenant(AddingTenants tenant) {
-        //updating the tenant's details
-        mDatabaseReference.child("Tenants").child(tenant.getUid()).child("name").setValue(tenant.getName());
-        mDatabaseReference.child("Tenants").child(tenant.getUid()).child("rent").setValue(tenant.getRent());
-        mDatabaseReference.child("Tenants").child(tenant.getUid()).child("deposit").setValue(tenant.getDeposit());
-        mDatabaseReference.child("Tenants").child(tenant.getUid()).child("dueDate").setValue(tenant.getRentDueDate());
+        try {
+            //updating the tenant's details
+            mDatabaseReference.child("Tenants").child(tenant.getUid()).child("name").setValue(tenant.getName());
+            mDatabaseReference.child("Tenants").child(tenant.getUid()).child("rent").setValue(tenant.getRent());
+            mDatabaseReference.child("Tenants").child(tenant.getUid()).child("deposit").setValue(tenant.getDeposit());
+            mDatabaseReference.child("Tenants").child(tenant.getUid()).child("dueDate").setValue(tenant.getRentDueDate());
 
-        clearAllText();
-        Toast.makeText(this, "Tenant Updated", Toast.LENGTH_SHORT).show();
+            clearAllText();
+            Toast.makeText(this, "Tenant Updated", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "There was a problem saving the tenant, please try again", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     private void createTenant() {
