@@ -2,6 +2,7 @@ package com.example.propertymanagment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mProfileName, mProfileStatus, mProfileFriendsCount;
     private Button mProfileSendReqBtn, mDeclineBtn;
 
+    public static final String TAG = "ProfileActivity";
     private DatabaseReference mUsersDatabase;
 
     private DatabaseReference mFriendReqDatabase;
@@ -178,6 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
+
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,16 +191,16 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if(mCurrent_state.equals("not_friends")){
 
-                    //dealing with tenant/friend request notifications
                     DatabaseReference newNotificationref = mRootRef.child("notifications").child(user_id).push();
                     String newNotificationId = newNotificationref.getKey();
 
-                    //more efficient method query-ing to the db
                     HashMap<String, String> notificationData = new HashMap<>();
                     notificationData.put("from", mCurrent_user.getUid());
                     notificationData.put("type", "request");
 
-                    //passed in to the 'rootref', the childless db, to do 3 queries at once.
+                    Log.d(TAG,"Tenant id= " +mCurrent_user.getUid()+ " is sending  "
+                            + notificationData.get("request"));
+
                     Map requestMap = new HashMap();
                     requestMap.put("Friend_req/" + mCurrent_user.getUid() + "/" + user_id + "/request_type", "sent");
                     requestMap.put("Friend_req/" + user_id + "/" + mCurrent_user.getUid() + "/request_type", "received");

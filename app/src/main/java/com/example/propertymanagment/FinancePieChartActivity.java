@@ -65,7 +65,6 @@ public class FinancePieChartActivity extends AppCompatActivity {
         billsFloat = bills;
 
         Log.d(TAG, "in the oncreate before the piechart config" + mortgageFloat+ "insurance float" + insuranceFloat);
-//        //pie chart apperance config
         pieChartConfig();
 
         addDataSet();
@@ -86,17 +85,13 @@ public class FinancePieChartActivity extends AppCompatActivity {
         Log.d(TAG, "in data set method: ");
 
         ArrayList<PieEntry> yEntries = new ArrayList<>();
-    //    ArrayList<String> xEntrys = new ArrayList<>();
 
-//        for(int i = 0; i < yData.size() -1; i++){
             yEntries.add(new PieEntry( yData.set(0,insuranceFloat )));
             yEntries.add(new PieEntry(yData.set(1, mortgageFloat )));
             yEntries.add(new PieEntry(yData.set(2, billsFloat)));
-//        }
 
-//        for (int i=0; i<xData.length; i++){
-//            xEntrys.add(xData[i]);
-//        }
+
+
 
         //creating the dataset
         PieDataSet pieDataSet = new PieDataSet(yEntries, "Property costs'");

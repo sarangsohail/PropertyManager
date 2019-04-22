@@ -28,12 +28,11 @@ public class video_streaming_activity extends Activity {
         try {
             if (isNetworkAvailable()){
 
+                String url = "http://192.168.1.7:8160/index.html";
                 WebView streamView = (WebView) findViewById(R.id.webview);
                 WebSettings webSettings = streamView.getSettings();
                 webSettings.setJavaScriptEnabled(true);
                 streamView.setWebViewClient(new WebViewClient());
-                String url = "http://google.com";
-                //   myWebView.loadUrl("http://192.168.1.7:8160/index.html");
                 Toast.makeText(this, "Loading Stream", Toast.LENGTH_SHORT).show();
                 streamView.loadUrl(url);
 
@@ -45,9 +44,6 @@ public class video_streaming_activity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        myWebView.setWebViewClient(new WebViewClient());
-//        myWebView.loadUrl("http://192.168.1.7:8160/index.html");
     }
 
     private boolean isNetworkAvailable() {
